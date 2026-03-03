@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:peminjaman_alat/models/user_model.dart';
+import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:peminjaman_alat/views/general_view/login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/material.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -57,6 +58,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> login(String email, String password) async {
+    isLoading.value = true;
     try {
       final UserCredential user = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -82,19 +84,24 @@ class AuthController extends GetxController {
         }
       }
     } on FirebaseAuthException catch (e) {
+      isLoading.value = false;
       final errorMessage = messageError(e.code);
-      
-      if(errorMessage == 'invalid-email'){
-        emailC.clear();
-      } else if(errorMessage == 'wrong-password'){
-        passC.clear();
-      } else if(errorMessage == 'invalid-credential'){
-        emailC.clear();
-        passC.clear();
-      }
 
-      Get.snackbar('Terjadi Kesalahan', errorMessage);
+      passC.clear();
+
+      Get.snackbar(
+        'Terjadi Kesalahan',
+        errorMessage,
+        backgroundColor: AppColors.error,
+        snackPosition: SnackPosition.TOP,
+        animationDuration: Duration(milliseconds: 800),
+        duration: Duration(seconds: 3),
+        icon: Icon(Icons.warning),
+        colorText: AppColors.background,
+
+      );
     } catch (error) {
+      isLoading.value = false;
       emailC.clear();
       passC.clear();
       Get.snackbar('Gagal', 'Terjadi Kesalahan, silahkan coba lagi nanti');

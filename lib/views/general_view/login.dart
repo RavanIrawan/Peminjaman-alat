@@ -22,11 +22,11 @@ class Login extends GetView<AuthController> {
           child: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsetsGeometry.all(8.0),
+                padding: const EdgeInsetsGeometry.all(8.0),
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsetsGeometry.all(9.0),
+                      padding: const EdgeInsetsGeometry.all(9.0),
                       decoration: BoxDecoration(
                         color: AppColors.primary.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(15),
@@ -103,6 +103,13 @@ class Login extends GetView<AuthController> {
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.1,
+                                    color: AppColors.error,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     width: 0.1,
@@ -149,6 +156,13 @@ class Login extends GetView<AuthController> {
                               obscureText: controller.isObsecureText.value ? false : true,
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.1,
+                                    color: AppColors.error,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     width: 0.1,
@@ -207,7 +221,7 @@ class Login extends GetView<AuthController> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if(formKey.currentState!.validate()){
-
+                                    controller.login(controller.emailC.text, controller.passC.text);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -249,7 +263,9 @@ class Login extends GetView<AuthController> {
                             Container(
                               width: double.infinity,
                               padding: EdgeInsetsGeometry.all(1.0),
-                              child: OutlinedButton(onPressed: (){}, 
+                              child: OutlinedButton(onPressed: (){
+                                controller.googleSignIn();
+                              }, 
                               style: OutlinedButton.styleFrom(
                                 overlayColor: AppColors.primaryLight,
                                 side: BorderSide(
