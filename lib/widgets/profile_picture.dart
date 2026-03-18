@@ -13,14 +13,17 @@ class ProfilePicture extends StatelessWidget {
         Positioned(
           right: 0,
           bottom: 0,
-          child: Container(
-            padding: EdgeInsetsGeometry.all(8),
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(50),
-              border: BoxBorder.all(width: 1.5, color: AppColors.background),
+          child: GestureDetector(
+            onTap: (){},
+            child: Container(
+              padding: EdgeInsetsGeometry.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(50),
+                border: BoxBorder.all(width: 1.5, color: AppColors.background),
+              ),
+              child: Icon(Icons.camera_alt, color: AppColors.background, size: 18),
             ),
-            child: Icon(Icons.camera_alt, color: AppColors.background, size: 18),
           ),
         ),
       ],
