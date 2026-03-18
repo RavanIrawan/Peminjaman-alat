@@ -15,6 +15,8 @@ class HomeAdmin extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
+        scrolledUnderElevation: 3.0,
+        surfaceTintColor: AppColors.primary,
         backgroundColor: AppColors.background,
         title: Text(
           'Admin Dashboard',
@@ -46,8 +48,8 @@ class HomeAdmin extends StatelessWidget {
                           ),
                         )
                       : CircleAvatar(
-                          backgroundColor: AppColors.textSecondary,
-                          child: Icon(Icons.person, size: 45),
+                          backgroundColor: Colors.grey,
+                          child: Icon(Icons.person, size: 25),
                         ),
                 ),
               ],
@@ -242,7 +244,6 @@ class HomeAdmin extends StatelessWidget {
                   ],
                 ),
               ),
-              SliverToBoxAdapter(child: SizedBox(height: 18)),
 
               SliverPadding(
                 padding: const EdgeInsets.all(20.0),
@@ -284,7 +285,7 @@ class HomeAdmin extends StatelessWidget {
                     Row(
                       children: [
                         GestureDetector(
-                          onTap: (){},
+                          onTap: () {},
                           child: Container(
                             width: 200,
                             padding: EdgeInsetsGeometry.all(8.0),
@@ -350,12 +351,6 @@ class HomeAdmin extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          authC.logout();
-        },
-        child: Icon(Icons.logout),
-      ),
     );
   }
 }
@@ -373,10 +368,11 @@ class ManagementMenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {},
       child: SizedBox(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               padding: EdgeInsetsGeometry.all(6.0),

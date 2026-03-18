@@ -4,6 +4,8 @@ import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'package:peminjaman_alat/controllers/main_admin_view_controller.dart';
 import 'package:peminjaman_alat/controllers/profile_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
+import 'package:peminjaman_alat/views/general_view/edit_profile.dart';
+import 'package:peminjaman_alat/views/general_view/reset_password.dart';
 import 'package:peminjaman_alat/widgets/profile_picture.dart';
 
 class Profile extends GetView<ProfileController> {
@@ -39,13 +41,24 @@ class Profile extends GetView<ProfileController> {
               children: [
                 ProfilePicture(
                   child: controller.currentUser.value?.profile != null
-                      ? CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(
-                            controller.currentUser.value?.profile ?? '',
+                      ? Container(
+                          width: 130,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                controller.currentUser.value?.profile ?? '',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(95),
                           ),
                         )
-                      : CircleAvatar(radius: 60, child: Text(nameProf)),
+                      : CircleAvatar(
+                          radius: 60,
+                          backgroundColor: AppColors.primary,
+                          child: Text(nameProf),
+                        ),
                 ),
 
                 SizedBox(height: 18),
@@ -121,7 +134,9 @@ class Profile extends GetView<ProfileController> {
                       ),
 
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(EditProfile.routeName);
+                        },
                         style: IconButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
@@ -165,7 +180,9 @@ class Profile extends GetView<ProfileController> {
                       ),
 
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(ResetPassword.routeName);
+                        },
                         style: IconButton.styleFrom(
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),

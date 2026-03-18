@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:peminjaman_alat/bindings/edit_profile_binding.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
 import 'package:peminjaman_alat/views/admin_view/main_admin_view.dart';
+import 'package:peminjaman_alat/views/general_view/edit_profile.dart';
 import 'package:peminjaman_alat/views/general_view/profile.dart';
 import 'package:peminjaman_alat/views/general_view/register.dart';
 import 'package:peminjaman_alat/views/general_view/reset_password.dart';
@@ -45,6 +47,13 @@ class RoutePage {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: EditProfile.routeName,
+      page: () => EditProfile(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: EditProfileBinding(),
     ),
   ];
 }
