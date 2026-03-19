@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/bindings/edit_profile_binding.dart';
+import 'package:peminjaman_alat/bindings/kategori_binding.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
+import 'package:peminjaman_alat/bindings/users_binding.dart';
+import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
 import 'package:peminjaman_alat/views/admin_view/main_admin_view.dart';
+import 'package:peminjaman_alat/views/admin_view/users_page.dart';
 import 'package:peminjaman_alat/views/general_view/edit_profile.dart';
 import 'package:peminjaman_alat/views/general_view/profile.dart';
 import 'package:peminjaman_alat/views/general_view/register.dart';
@@ -54,6 +58,20 @@ class RoutePage {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
       binding: EditProfileBinding(),
+    ),
+    GetPage(
+      name: KategoryHome.routeName,
+      page: () => KategoryHome(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: KategoriBinding(),
+    ),
+    GetPage(
+      name: UsersPage.routeName,
+      page: () => UsersPage(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: UsersBinding(),
     ),
   ];
 }

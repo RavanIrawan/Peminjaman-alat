@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
+import 'package:peminjaman_alat/views/admin_view/users_page.dart';
 
 class MainAdminViewController extends GetxController {
   final List<Tab> tabs = [
@@ -10,13 +12,13 @@ class MainAdminViewController extends GetxController {
     'users':{
       'icon':Icons.person_search,
       'text':'Data Users',
-      'route':'/users',
+      'route': UsersPage.routeName,
     },
 
     'kategori': {
       'icon': Icons.category,
       'text':'Data Kategori',
-      'route': '/kategori',
+      'route': KategoryHome.routeName,
     },
 
     'alat': {
