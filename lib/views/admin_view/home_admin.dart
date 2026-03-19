@@ -17,7 +17,7 @@ class HomeAdmin extends StatelessWidget {
       appBar: AppBar(
         scrolledUnderElevation: 3.0,
         surfaceTintColor: AppColors.primary,
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.surface,
         title: Text(
           'Admin Dashboard',
           style: TextStyle(
@@ -90,7 +90,7 @@ class HomeAdmin extends StatelessWidget {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(8.0),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(child: SizedBox(height: 10)),
@@ -132,85 +132,117 @@ class HomeAdmin extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: EdgeInsetsGeometry.all(5),
-                                decoration: BoxDecoration(
-                                  color: AppColors.primary.withValues(
-                                    alpha: 0.1,
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.surface,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.textPrimary.withValues(alpha: 0.1),
+                                  spreadRadius: 2,
+                                  blurRadius: 15,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsetsGeometry.all(5),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primary.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    child: Icon(
+                                      Icons.group,
+                                      color: AppColors.primary,
+                                      size: 25,
+                                    ),
                                   ),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Icon(
-                                  Icons.group,
-                                  color: AppColors.primary,
-                                  size: 25,
-                                ),
+                                  SizedBox(height: 20),
+                                  Text(
+                                    'Total Users',
+                                    style: TextStyle(
+                                      color: AppColors.textSecondary,
+                                      fontFamily: 'Inter',
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    '150',
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(height: 20),
-                              Text(
-                                'Total Users',
-                                style: TextStyle(
-                                  color: AppColors.textSecondary,
-                                  fontFamily: 'Inter',
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                '150',
-                                style: TextStyle(
-                                  color: AppColors.primary,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
+                      SizedBox(width: 8),
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: EdgeInsetsGeometry.all(5),
-                                decoration: BoxDecoration(
-                                  color: AppColors.primary.withValues(
-                                    alpha: 0.1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Icon(
-                                  Icons.inventory,
-                                  color: AppColors.primary,
-                                  size: 25,
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                'Total Items',
-                                style: TextStyle(
-                                  color: AppColors.textSecondary,
-                                  fontFamily: 'Inter',
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Text(
-                                '500',
-                                style: TextStyle(
-                                  color: AppColors.primary,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.surface,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.textPrimary.withValues(alpha: 0.1),
+                                spreadRadius: 2,
+                                blurRadius: 15,
+                                offset: Offset(0, 2),
                               ),
                             ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: EdgeInsetsGeometry.all(5),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary.withValues(
+                                      alpha: 0.1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Icon(
+                                    Icons.inventory,
+                                    color: AppColors.primary,
+                                    size: 25,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  'Total Items',
+                                  style: TextStyle(
+                                    color: AppColors.textSecondary,
+                                    fontFamily: 'Inter',
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  '500',
+                                  style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -260,6 +292,7 @@ class HomeAdmin extends StatelessWidget {
                     return ManagementMenuCard(
                       icon: dataItem['icon'] as IconData,
                       text: dataItem['text'] as String,
+                      route: dataItem['route'] as String,
                     );
                   },
                   itemCount: homeC.menuCard.length,
@@ -369,8 +402,22 @@ class ManagementMenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      child: SizedBox(
+      onTap: () {
+        Get.toNamed(route!);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.textPrimary.withValues(alpha: 0.1),
+              spreadRadius: 1.2,
+              blurRadius: 10,
+              offset: Offset(0, 2)
+            )
+          ]
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
