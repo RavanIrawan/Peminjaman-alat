@@ -20,6 +20,8 @@ class AuthController extends GetxController {
   final isObsecureTextPassReg = false.obs;
   final isObsecureTextRegConfirmPass = false.obs;
 
+  FirebaseAuth get auth => _auth;
+
   late TextEditingController nameReg;
   late TextEditingController emailReg;
   late TextEditingController passReg;
@@ -56,20 +58,30 @@ class AuthController extends GetxController {
           String role = userDoc['role'] ?? 'Admin';
 
           if (role == 'Admin') {
-          emailC.clear();
-          passC.clear();
-          Get.offAllNamed('/Admin-view');
-        } else if (role == 'Petugas') {
-          emailC.clear();
-          passC.clear();
-          Get.offAllNamed('/Petugas-view');
-        } else if (role == 'Peminjam') {
-          emailC.clear();
-          passC.clear();
-          Get.offAllNamed('/Peminjam-view');
-        }
+            emailC.clear();
+            passC.clear();
+            Get.offAllNamed('/Admin-view');
+          } else if (role == 'Petugas') {
+            emailC.clear();
+            passC.clear();
+            Get.offAllNamed('/Petugas-view');
+          } else if (role == 'Peminjam') {
+            emailC.clear();
+            passC.clear();
+            Get.offAllNamed('/Peminjam-view');
+          }
         } else {
           isLoading.value = false;
+          Get.snackbar(
+            'Gagal',
+            'User tidak di temukan, silahkan coba lagi nanti',
+            backgroundColor: AppColors.error,
+            snackPosition: SnackPosition.TOP,
+            animationDuration: Duration(milliseconds: 800),
+            duration: Duration(seconds: 3),
+            icon: Icon(Icons.warning),
+            colorText: AppColors.background,
+          );
           return;
         }
       } else {
@@ -79,8 +91,8 @@ class AuthController extends GetxController {
     } catch (error) {
       isLoading.value = false;
       Get.snackbar(
-        'gagal',
-        'User tidak di temukan, silahkan coba lagi nanti',
+        'Gagal',
+        'Error $error',
         backgroundColor: AppColors.error,
         snackPosition: SnackPosition.TOP,
         animationDuration: Duration(milliseconds: 800),
@@ -88,6 +100,8 @@ class AuthController extends GetxController {
         icon: Icon(Icons.warning),
         colorText: AppColors.background,
       );
+    } finally {
+      isLoading.value = false;
     }
   }
 
@@ -111,6 +125,20 @@ class AuthController extends GetxController {
         if (user.user?.email != emailUser['email']) {
           await userDoc.reference.update({'email': user.user?.email});
         }
+      } else {
+        isLoading.value = false;
+        emailC.clear();
+        passC.clear();
+        Get.snackbar(
+          'Gagal',
+          'User tidak di temukan, silahkan coba lagi nanti',
+          backgroundColor: AppColors.error,
+          snackPosition: SnackPosition.TOP,
+          animationDuration: Duration(milliseconds: 800),
+          duration: Duration(seconds: 3),
+          icon: Icon(Icons.warning),
+          colorText: AppColors.background,
+        );
       }
     } on FirebaseAuthException catch (e) {
       isLoading.value = false;

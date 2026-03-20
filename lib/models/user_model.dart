@@ -3,8 +3,8 @@ import 'package:peminjaman_alat/utils/url_default_profile.dart';
 
 class UserModel {
   String? id;
-  final String nama;
-  final String email;
+  final String? nama;
+  final String? email;
   final String? role;
   String? profile;
   final int? phone;
@@ -12,8 +12,8 @@ class UserModel {
 
   UserModel({
     this.id,
-    required this.nama,
-    required this.email,
+    this.nama,
+    this.email,
     this.role,
     this.profile,
     this.phone,

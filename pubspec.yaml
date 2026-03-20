@@ -87,6 +87,7 @@ flutter:
     - assets/icons/GoogleLogo.png
     - assets/logos/
     - assets/lotties/
+    - assets/lotties/success.json
     - assets/lotties/deleteIconAnimation.json
   #   - images/a_dot_ham.jpeg
 
