@@ -249,6 +249,7 @@ class KategoriProduct extends GetView<KategoriController> {
                   delegate: SliverChildBuilderDelegate((context, index) {
                     final KategoriModel data = controller.dataKategori[index];
                     final icon = KategoriHelper.getVisual(data.name);
+                    final dataAlatCount = controller.checkAlatIdWithKategoriId(data.id ?? '');
 
                     return Padding(
                       padding: EdgeInsetsGeometry.all(8.0),
@@ -297,7 +298,7 @@ class KategoriProduct extends GetView<KategoriController> {
                                       ),
                                     ),
                                     Text(
-                                      '8 items',
+                                      '$dataAlatCount items',
                                       style: TextStyle(
                                         color: AppColors.textSecondary,
                                         fontFamily: 'Inter',

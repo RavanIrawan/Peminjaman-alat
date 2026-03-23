@@ -1,11 +1,15 @@
 import 'package:get/get.dart';
+import 'package:peminjaman_alat/bindings/add_alat_binding.dart';
 import 'package:peminjaman_alat/bindings/add_user_binding.dart';
+import 'package:peminjaman_alat/bindings/alat_binding.dart';
 import 'package:peminjaman_alat/bindings/dashboard_home_admin_binding.dart';
 import 'package:peminjaman_alat/bindings/edit_profile_binding.dart';
 import 'package:peminjaman_alat/bindings/kategori_binding.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
 import 'package:peminjaman_alat/bindings/users_binding.dart';
+import 'package:peminjaman_alat/views/admin_view/add_new_alat.dart';
 import 'package:peminjaman_alat/views/admin_view/add_new_user.dart';
+import 'package:peminjaman_alat/views/admin_view/alat_view_admin.dart';
 import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
 import 'package:peminjaman_alat/views/admin_view/main_admin_view.dart';
 import 'package:peminjaman_alat/views/admin_view/users_page.dart';
@@ -83,6 +87,20 @@ class RoutePage {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
       binding: AddUserBinding(),
+    ),
+    GetPage(
+      name: AlatViewAdmin.routeName,
+      page: () => AlatViewAdmin(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: AlatBinding(),
+    ),
+    GetPage(
+      name: AddNewAlat.routeName,
+      page: () => AddNewAlat(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: AddAlatBinding(),
     ),
   ];
 }
