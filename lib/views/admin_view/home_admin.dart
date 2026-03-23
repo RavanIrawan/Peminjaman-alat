@@ -100,7 +100,10 @@ class HomeAdmin extends GetView<HomeAdminController> {
         return RefreshIndicator.adaptive(
           color: AppColors.primary,
           displacement: 1.5,
-          onRefresh: () => controller.getDataCountUser(),
+          onRefresh: () {
+            controller.getDataCountAlat();
+            return controller.getDataCountUser();
+          },
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -135,9 +138,9 @@ class HomeAdmin extends GetView<HomeAdminController> {
                       ),
                     ),
                   ),
-          
+
                   SliverToBoxAdapter(child: SizedBox(height: 10)),
-          
+
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -164,7 +167,8 @@ class HomeAdmin extends GetView<HomeAdminController> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(6.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         padding: EdgeInsetsGeometry.all(5),
@@ -172,7 +176,9 @@ class HomeAdmin extends GetView<HomeAdminController> {
                                           color: AppColors.primary.withValues(
                                             alpha: 0.1,
                                           ),
-                                          borderRadius: BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(
+                                            50,
+                                          ),
                                         ),
                                         child: Icon(
                                           Icons.group,
@@ -250,7 +256,7 @@ class HomeAdmin extends GetView<HomeAdminController> {
                                       ),
                                     ),
                                     Text(
-                                      '500',
+                                      '${controller.alatCountData}',
                                       style: TextStyle(
                                         color: AppColors.primary,
                                         fontFamily: 'Poppins',
@@ -267,7 +273,7 @@ class HomeAdmin extends GetView<HomeAdminController> {
                       ),
                     ),
                   ),
-          
+
                   SliverToBoxAdapter(child: SizedBox(height: 18)),
                   SliverToBoxAdapter(
                     child: Row(
@@ -293,7 +299,7 @@ class HomeAdmin extends GetView<HomeAdminController> {
                       ],
                     ),
                   ),
-          
+
                   SliverPadding(
                     padding: const EdgeInsets.all(20.0),
                     sliver: SliverGrid.builder(
@@ -315,7 +321,7 @@ class HomeAdmin extends GetView<HomeAdminController> {
                       itemCount: homeC.menuCard.length,
                     ),
                   ),
-          
+
                   SliverToBoxAdapter(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,9 +335,9 @@ class HomeAdmin extends GetView<HomeAdminController> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-          
+
                         SizedBox(height: 5),
-          
+
                         Row(
                           children: [
                             GestureDetector(
@@ -353,14 +359,14 @@ class HomeAdmin extends GetView<HomeAdminController> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'New User',
                                         style: TextStyle(
-                                          color: AppColors.background.withValues(
-                                            alpha: 0.8,
-                                          ),
+                                          color: AppColors.background
+                                              .withValues(alpha: 0.8),
                                           fontFamily: 'Inter',
                                         ),
                                       ),

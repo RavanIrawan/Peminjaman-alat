@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/models/kategori_model.dart';
+import 'package:peminjaman_alat/providers/alat_provider.dart';
 import 'package:peminjaman_alat/providers/kategori_product_provider.dart';
 import 'package:peminjaman_alat/utils/random_text.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
@@ -9,18 +10,21 @@ import 'package:lottie/lottie.dart';
 class KategoriController extends GetxController {
   final dataKategori = <KategoriModel>[].obs;
   final dataKategoriEdit = <KategoriModel>[].obs;
+  final dataAlatId = <String>[].obs;
   final isLoading = false.obs;
   final kategoriNameText = TextEditingController();
   final kategoriNameTextEdit = TextEditingController();
   final keyword = ''.obs;
   final _provider = Get.find<KategoriProductProvider>();
   final newIsEdit = ''.obs;
+  final _alatProvider = AlatProvider();
 
   int? get dataKategoriLength => dataKategori.length;
 
   @override
-  void onInit() {
-    getAllkategori();
+  void onInit() async {
+    await getAllkategori();
+    await getAllAlatId();
 
     debounce(keyword, (callback) {
       searchDataKategory(keyword.value);
@@ -32,6 +36,39 @@ class KategoriController extends GetxController {
   void onClose() {
     kategoriNameText.dispose();
     super.onClose();
+  }
+
+  int checkAlatIdWithKategoriId(String id) {
+    final idData = dataAlatId.where((i) => i == id,).length;
+
+    return idData;
+  }
+
+  Future<void> getAllAlatId() async {
+    isLoading.value = true;
+    try {
+      final response = await _alatProvider.getAlat();
+
+      if (response.docs.isNotEmpty) {
+        for (var alat in response.docs) {
+          final data = alat.data() as Map<String, dynamic>;
+          dataAlatId.add(data['idKategori']);
+        }
+      }
+    } catch (error) {
+      Get.snackbar(
+        'Error',
+        'Error $error',
+        backgroundColor: AppColors.error,
+        snackPosition: SnackPosition.TOP,
+        animationDuration: Duration(milliseconds: 800),
+        duration: Duration(seconds: 3),
+        icon: Icon(Icons.warning),
+        colorText: AppColors.background,
+      );
+    }finally{
+      isLoading.value = false;
+    }
   }
 
   void toggleEditForm(String id) {
@@ -104,17 +141,17 @@ class KategoriController extends GetxController {
           colorText: AppColors.background,
         );
       }
-    } else{
+    } else {
       Get.snackbar(
-          'Gagal',
-          'Gagal data kategori tidak ditemukan',
-          backgroundColor: AppColors.error,
-          snackPosition: SnackPosition.TOP,
-          animationDuration: Duration(milliseconds: 800),
-          duration: Duration(seconds: 3),
-          icon: Icon(Icons.warning),
-          colorText: AppColors.background,
-        );
+        'Gagal',
+        'Gagal data kategori tidak ditemukan',
+        backgroundColor: AppColors.error,
+        snackPosition: SnackPosition.TOP,
+        animationDuration: Duration(milliseconds: 800),
+        duration: Duration(seconds: 3),
+        icon: Icon(Icons.warning),
+        colorText: AppColors.background,
+      );
     }
   }
 

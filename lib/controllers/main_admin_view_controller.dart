@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:peminjaman_alat/views/admin_view/alat_view_admin.dart';
 import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
 import 'package:peminjaman_alat/views/admin_view/users_page.dart';
 
@@ -24,7 +25,7 @@ class MainAdminViewController extends GetxController {
     'alat': {
       'icon': Icons.construction,
       'text': 'Data Alat',
-      'route': '/alat',
+      'route': AlatViewAdmin.routeName,
     },
 
     'peminjaman': {

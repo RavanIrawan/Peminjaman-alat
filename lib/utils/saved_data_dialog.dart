@@ -6,7 +6,7 @@ import 'package:peminjaman_alat/utils/app_colors.dart';
 class SavedDataDialog {
   void showSavedDataDialog(String title, String text) {
     Get.defaultDialog(
-      barrierDismissible: true,
+      barrierDismissible: false,
       backgroundColor: AppColors.surface,
       title: '',
       titlePadding: EdgeInsets.zero,

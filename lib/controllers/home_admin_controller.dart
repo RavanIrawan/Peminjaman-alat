@@ -5,12 +5,14 @@ import 'package:peminjaman_alat/utils/app_colors.dart';
 
 class HomeAdminController extends GetxController {
   final userCountData = 0.obs;
+  final alatCountData = 0.obs;
   final isLoading = false.obs;
   final _provider = Get.find<DashboardAdminProvider>();
 
   @override
   void onInit() {
     getDataCountUser();
+    getDataCountAlat();
     super.onInit();
   }
 
@@ -20,6 +22,27 @@ class HomeAdminController extends GetxController {
       final userCount = await _provider.getUserLength();
 
       userCountData.value = userCount;
+    }catch(error){
+      Get.snackbar(
+        'Gagal',
+        'Terjadi kesalahan $error',
+        backgroundColor: AppColors.error,
+        snackPosition: SnackPosition.TOP,
+        animationDuration: Duration(milliseconds: 800),
+        duration: Duration(seconds: 3),
+        icon: Icon(Icons.warning),
+        colorText: AppColors.background,
+      );
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  Future<void> getDataCountAlat() async {
+    isLoading.value = true;
+    try{
+      final alatCount = await _provider.getAlatLength();
+
+      alatCountData.value = alatCount;
     }catch(error){
       Get.snackbar(
         'Gagal',
