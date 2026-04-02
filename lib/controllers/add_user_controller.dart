@@ -100,6 +100,7 @@ class AddUserController extends GetxController {
       SavedDataDialog().showSavedDataDialog(
         'Data Tersimpan!',
         'Data user baru berhasil ditambahkan ke dalam sistem',
+        false
       );
     } on FirebaseAuthException catch (e) {
       final errorMessage = messageError(e.code);
