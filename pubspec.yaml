@@ -44,6 +44,7 @@ dependencies:
   firebase_storage: ^13.1.0
   image_picker: ^1.0.8
   lottie: ^3.0.0
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +90,7 @@ flutter:
     - assets/lotties/
     - assets/lotties/success.json
     - assets/lotties/deleteIconAnimation.json
+    - assets/lotties/successTransactionUser.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

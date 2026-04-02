@@ -5,6 +5,7 @@ import 'package:peminjaman_alat/bindings/alat_binding.dart';
 import 'package:peminjaman_alat/bindings/dashboard_home_admin_binding.dart';
 import 'package:peminjaman_alat/bindings/edit_profile_binding.dart';
 import 'package:peminjaman_alat/bindings/kategori_binding.dart';
+import 'package:peminjaman_alat/bindings/peminjam/detail_alat_binding.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
 import 'package:peminjaman_alat/bindings/users_binding.dart';
 import 'package:peminjaman_alat/views/admin_view/add_new_alat.dart';
@@ -17,8 +18,10 @@ import 'package:peminjaman_alat/views/general_view/edit_profile.dart';
 import 'package:peminjaman_alat/views/general_view/profile.dart';
 import 'package:peminjaman_alat/views/general_view/register.dart';
 import 'package:peminjaman_alat/views/general_view/reset_password.dart';
+import 'package:peminjaman_alat/views/peminjam_view/detail_alat_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/home_peminjam.dart';
 import 'package:peminjaman_alat/views/petugas_view/home_petugas.dart';
+import 'package:peminjaman_alat/bindings/peminjam/dashboard_peminjaman.dart';
 
 class RoutePage {
   static final route = [
@@ -46,6 +49,7 @@ class RoutePage {
       page: () => HomePeminjam(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
+      binding: DashboardPeminjaman(),
     ),
     GetPage(
       name: ResetPassword.routeName,
@@ -101,6 +105,13 @@ class RoutePage {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
       binding: AddAlatBinding(),
+    ),
+    GetPage(
+      name: DetailAlatView.routeName,
+      page: () => DetailAlatView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: DetailAlatBinding(),
     ),
   ];
 }

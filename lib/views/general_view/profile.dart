@@ -34,6 +34,12 @@ class Profile extends GetView<ProfileController> {
         centerTitle: true,
       ),
       body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(color: AppColors.primary),
+          );
+        }
+        
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),

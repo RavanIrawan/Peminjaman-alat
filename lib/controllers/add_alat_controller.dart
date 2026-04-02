@@ -124,6 +124,7 @@ class AddAlatController extends GetxController {
           SavedDataDialog().showSavedDataDialog(
             'Berhasil',
             'Data Barang barhasil di update',
+            false
           );
         } else {
           Get.snackbar(
@@ -271,6 +272,7 @@ class AddAlatController extends GetxController {
       SavedDataDialog().showSavedDataDialog(
         'Berhasil',
         'Data Barang telah berhasil disimpan',
+        false
       );
     } catch (error) {
       Get.snackbar(
