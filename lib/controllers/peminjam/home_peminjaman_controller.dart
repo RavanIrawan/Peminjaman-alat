@@ -8,6 +8,7 @@ class HomePeminjamanController extends GetxController
   final pages = [
     Tab(icon: Icon(Icons.home_filled), text: 'Beranda'),
     Tab(icon: Icon(Icons.shopping_cart), text: 'Keranjang'),
+    Tab(icon: Icon(Icons.assignment), text: 'Pinjaman saya'),
     Tab(text: 'Profile', icon: Icon(Icons.person)),
   ];
 

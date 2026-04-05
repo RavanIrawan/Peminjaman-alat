@@ -91,6 +91,7 @@ flutter:
     - assets/lotties/success.json
     - assets/lotties/deleteIconAnimation.json
     - assets/lotties/successTransactionUser.json
+    - assets/lotties/cancel.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

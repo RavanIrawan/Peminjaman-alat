@@ -11,6 +11,7 @@ class KeranjangModel {
       'productId': products.id ?? 0,
       'nama': products.namaAlat ?? 'Unknown',
       'qty': qty,
+      'gambar': products.gambar ?? '',
     };
   }
 }

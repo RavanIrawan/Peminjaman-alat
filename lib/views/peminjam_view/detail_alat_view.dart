@@ -434,6 +434,7 @@ class DetailAlatView extends GetView<DetailAlatViewController> {
                       controller.now.value,
                       controller.selectedDuration.value!,
                       controller.tenggatWaktu,
+                      controller.detailProd.value?.gambar ?? '',
                     );
                   }
                 },
