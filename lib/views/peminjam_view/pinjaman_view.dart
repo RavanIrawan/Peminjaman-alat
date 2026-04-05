@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/controllers/peminjam/pinjaman_view_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
+import 'package:peminjaman_alat/views/peminjam_view/cancel_peminjaman_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/pinjaman_diajukan_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/pinjaman_saya_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/pinjaman_selesai_view.dart';
@@ -16,12 +17,15 @@ class PinjamanView extends GetView<PinjamanViewController> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.surface,
-          title: Text('Barang saya', style: TextStyle(
-            color: AppColors.textPrimary,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),),
+          title: Text(
+            'Barang saya',
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
           centerTitle: true,
           bottom: TabBar(
             unselectedLabelColor: Colors.grey,
@@ -31,8 +35,22 @@ class PinjamanView extends GetView<PinjamanViewController> {
             overlayColor: WidgetStateColor.transparent,
             tabs: controller.tab,
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.toNamed(CancelPeminjamanView.routeName);
+              },
+              icon: Icon(Icons.delete_sweep, color: AppColors.primary),
+            ),
+          ],
         ),
-        body: TabBarView(children: [PinjamanDiajukanView(), PinjamanSayaView(), PinjamanSelesaiView()]),
+        body: TabBarView(
+          children: [
+            PinjamanDiajukanView(),
+            PinjamanSayaView(),
+            PinjamanSelesaiView(),
+          ],
+        ),
       ),
     );
   }
