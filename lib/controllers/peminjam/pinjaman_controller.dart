@@ -35,6 +35,14 @@ class PinjamanController extends GetxController {
     super.onClose();
   }
 
+  void clearData() {
+    _streamSubscription?.cancel();
+    data.clear();
+    dataPeminjaman.clear();
+    dataPeminjamanDiAjukan.clear();
+    dataPeminjamanSelesai.clear();
+  }
+
   bool checkTenggatWaktu(String id) {
     final index = data.indexWhere((element) => element.id == id);
     DateTime now = DateTime(currentDay.year, currentDay.month, currentDay.day);
@@ -61,7 +69,8 @@ class PinjamanController extends GetxController {
         dataPeminjamanDiAjukan.clear();
         dataPeminjamanSelesai.clear();
 
-        for (var res in event.docs) {
+        for (var dataRes in event.docs) {
+          final res = dataRes.data() as Map<String, dynamic>;
           final detail = <DetailPeminjaman>[];
           for (var detailPinjaman in res['detailPinjaman']) {
             final detailData = DetailPeminjaman(
@@ -75,17 +84,25 @@ class PinjamanController extends GetxController {
           }
 
           final peminjaman = PeminjamanModel(
-            id: res.id,
+            id: dataRes.id,
             denda: res['denda'] ?? 0,
             detailPinjaman: detail,
             durasi: res['durasiHari'] ?? 0,
             idPeminjam: res['idPeminjam'] ?? '',
             status: res['status'] ?? '',
-            tanggalKembali: res['tanggalKembali'] == 'null'
+            tanggalKembali: res['tanggalKembali'] != null
+                ? (res['tanggalKembali'] as Timestamp).toDate()
+                : null,
+            tanggalPinjam: res['tanggalPinjam'] != null
+                ? (res['tanggalPinjam'] as Timestamp).toDate()
+                : DateTime.now(),
+            tenggatWaktu: res['tenggatWaktu'] != null
+                ? (res['tenggatWaktu'] as Timestamp).toDate()
+                : DateTime.now(),
+            alasanPenolakan: res['alasanPenolakan'] ?? '',
+            tanggalDitolak: res['tanggalDitolak'] == null
                 ? null
-                : (res['tanggalKembali'] as Timestamp).toDate(),
-            tanggalPinjam: (res['tanggalPinjam'] as Timestamp).toDate(),
-            tenggatWaktu: (res['tenggatWaktu'] as Timestamp).toDate(),
+                : (res['tanggalDitolak'] as Timestamp).toDate(),
           );
 
           data.add(peminjaman);

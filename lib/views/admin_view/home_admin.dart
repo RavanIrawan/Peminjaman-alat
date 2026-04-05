@@ -29,7 +29,6 @@ class HomeAdmin extends GetView<HomeAdminController> {
             color: AppColors.textPrimary,
           ),
         ),
-        titleSpacing: 0,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -58,37 +57,6 @@ class HomeAdmin extends GetView<HomeAdminController> {
             ),
           ),
         ],
-      ),
-      drawer: Drawer(
-        backgroundColor: AppColors.background,
-        child: ListView(
-          padding: EdgeInsetsGeometry.zero,
-          children: [
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: AppColors.primary),
-              accountName: Text(
-                authC.user.value?.displayName ?? 'Guest@gmail.com',
-                style: TextStyle(fontFamily: 'Inter'),
-              ),
-              accountEmail: Text(
-                authC.user.value?.email ?? 'Guest',
-                style: TextStyle(fontFamily: 'Inter'),
-              ),
-              currentAccountPicture: authC.user.value?.photoURL != null
-                  ? CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.grey,
-                      backgroundImage: NetworkImage(
-                        authC.user.value!.photoURL!,
-                      ),
-                    )
-                  : CircleAvatar(
-                      backgroundColor: AppColors.textSecondary,
-                      child: Icon(Icons.person, size: 45),
-                    ),
-            ),
-          ],
-        ),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {

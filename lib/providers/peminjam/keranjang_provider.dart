@@ -10,10 +10,10 @@ class KeranjangProvider {
     Timestamp tglPinjam,
     int durasi,
     Timestamp tenggat,
-    Timestamp? tanggalKembali,
     String status,
     int? denda,
     List<Map<String, dynamic>> items,
+    String? alasanPenolakan,
   ) async {
     final batch = _reference.batch();
 
@@ -24,10 +24,10 @@ class KeranjangProvider {
       'durasiHari': durasi,
       'tanggalPinjam': tglPinjam,
       'tenggatWaktu': tenggat,
-      'tanggalKembali': tanggalKembali ?? 'null',
       'status': status,
       'denda': denda ?? 0,
       'detailPinjaman': items,
+      'alasanPenolakan': alasanPenolakan ?? '',
     };
 
     batch.set(docTransRef, dataTransfer);

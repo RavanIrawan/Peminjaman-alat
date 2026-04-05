@@ -1,15 +1,17 @@
 import 'package:peminjaman_alat/models/detail_peminjaman.dart';
 
 class PeminjamanModel {
-  String? id;
+  final String? id;
   int denda;
   List<DetailPeminjaman> detailPinjaman;
   int durasi;
   String idPeminjam;
   String status;
-  DateTime? tanggalKembali;
+  final DateTime? tanggalKembali;
   DateTime tanggalPinjam;
   DateTime tenggatWaktu;
+  final String? alasanPenolakan;
+  final DateTime? tanggalDitolak;
 
   PeminjamanModel({
     this.id,
@@ -21,5 +23,7 @@ class PeminjamanModel {
     this.tanggalKembali,
     required this.tanggalPinjam,
     required this.tenggatWaktu,
+    this.alasanPenolakan,
+    this.tanggalDitolak,
   });
 }

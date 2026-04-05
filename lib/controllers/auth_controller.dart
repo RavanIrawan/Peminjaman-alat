@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:peminjaman_alat/controllers/peminjam/pinjaman_controller.dart';
+// import 'package:peminjaman_alat/controllers/peminjam/pinjaman_controller.dart';
 import 'package:peminjaman_alat/models/user_model.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:peminjaman_alat/utils/url_default_profile.dart';
@@ -27,6 +29,8 @@ class AuthController extends GetxController {
   late TextEditingController passReg;
 
   late TextEditingController emailReset;
+
+  // final pinjamanC = PinjamanController();
 
   @override
   void onInit() {
@@ -293,6 +297,14 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     final User? currentUser = _auth.currentUser;
+    
+    if (Get.isRegistered<PinjamanController>()) {
+      final pinjamanC = Get.find<PinjamanController>();
+
+      pinjamanC.clearData();
+
+      Get.delete<PinjamanController>();
+    }
 
     if (currentUser != null) {
       for (var provider in currentUser.providerData) {

@@ -8,6 +8,7 @@ import 'package:peminjaman_alat/bindings/kategori_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/cancel_peminjaman_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/detail_alat_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/detail_pinjaman_binding.dart';
+import 'package:peminjaman_alat/bindings/peminjam/rejected_binding.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
 import 'package:peminjaman_alat/bindings/users_binding.dart';
 import 'package:peminjaman_alat/views/admin_view/add_new_alat.dart';
@@ -24,6 +25,7 @@ import 'package:peminjaman_alat/views/peminjam_view/cancel_peminjaman_view.dart'
 import 'package:peminjaman_alat/views/peminjam_view/detail_alat_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/detail_pinjaman_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/home_peminjam.dart';
+import 'package:peminjaman_alat/views/peminjam_view/rejected_view.dart';
 import 'package:peminjaman_alat/views/petugas_view/home_petugas.dart';
 import 'package:peminjaman_alat/bindings/peminjam/dashboard_peminjaman.dart';
 
@@ -130,6 +132,13 @@ class RoutePage {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
       binding: CancelPeminjamanBinding(),
+    ),
+    GetPage(
+      name: RejectedView.routeName,
+      page: () => RejectedView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: RejectedBinding(),
     ),
   ];
 }
