@@ -276,9 +276,23 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                 title: Text(
                   'Diajukan',
                   style: TextStyle(
-                    color: AppColors.textPrimary,
+                    color:
+                        controller.data.value?.status ==
+                                'menunggu_persetujuan' ||
+                            controller.data.value?.status == 'diPinjam' ||
+                            controller.data.value?.status == 'selesai' ||
+                            controller.data.value?.status == 'di_kembalikan'
+                        ? AppColors.textPrimary
+                        : AppColors.textSecondary,
                     fontFamily: 'Inter',
-                    fontWeight: FontWeight.bold,
+                    fontWeight:
+                        controller.data.value?.status ==
+                                'menunggu_persetujuan' ||
+                            controller.data.value?.status == 'diPinjam' ||
+                            controller.data.value?.status == 'selesai' ||
+                            controller.data.value?.status == 'di_kembalikan'
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                   ),
                 ),
                 subTitle: Text(
@@ -391,7 +405,8 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
       ),
       bottomNavigationBar:
           controller.data.value?.status == 'selesai' ||
-              controller.data.value?.status == 'di_kembalikan'
+              controller.data.value?.status == 'di_kembalikan' ||
+              controller.data.value?.status == 'di_batalkan'
           ? SizedBox.shrink()
           : Padding(
               padding: const EdgeInsets.all(8.0),
