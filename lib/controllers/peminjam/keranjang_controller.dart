@@ -111,7 +111,7 @@ class KeranjangController extends GetxController {
     DateTime now,
     int duration,
     DateTime tenggat,
-    String gambar
+    String gambar,
   ) async {
     if (qty == 0) return;
     isLoadingDetail.value = true;
@@ -125,10 +125,10 @@ class KeranjangController extends GetxController {
         Timestamp.fromDate(now),
         duration,
         Timestamp.fromDate(tenggat),
-        null,
         'menunggu_persetujuan',
         0,
         data,
+        '',
       );
       SavedDataDialog().showSavedDataDialog(
         'Pengajuan Berhasil!',
@@ -162,10 +162,10 @@ class KeranjangController extends GetxController {
         Timestamp.fromDate(now.value),
         selectedDuration.value!,
         Timestamp.fromDate(tenggatWaktu),
-        null,
         'menunggu_persetujuan',
         0,
         data,
+        '',
       );
       cartItems.clear();
 

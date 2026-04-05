@@ -56,7 +56,10 @@ class SavedDataDialog {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      final tabPage = Get.find<HomePeminjamanController>();
                       Get.back();
+
+                      tabPage.changeTabIndex(2);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
@@ -91,7 +94,9 @@ class SavedDataDialog {
                       final tabPage = Get.find<HomePeminjamanController>();
 
                       tabPage.changeTabIndex(0);
-                      Get.until((route) => route.settings.name == '/Peminjam-view',);
+                      Get.until(
+                        (route) => route.settings.name == '/Peminjam-view',
+                      );
                     },
                     child: Text(
                       'Kembali Ke Beranda',

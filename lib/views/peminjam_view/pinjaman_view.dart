@@ -26,7 +26,6 @@ class PinjamanView extends GetView<PinjamanViewController> {
               fontSize: 18,
             ),
           ),
-          centerTitle: true,
           bottom: TabBar(
             unselectedLabelColor: Colors.grey,
             indicatorColor: AppColors.primary,
@@ -41,6 +40,10 @@ class PinjamanView extends GetView<PinjamanViewController> {
                 Get.toNamed(CancelPeminjamanView.routeName);
               },
               icon: Icon(Icons.delete_sweep, color: AppColors.primary),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.remove_done, color: AppColors.primary),
             ),
           ],
         ),
