@@ -5,6 +5,7 @@ import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:peminjaman_alat/views/general_view/profile.dart';
 import 'package:peminjaman_alat/views/peminjam_view/home_peminjaman_product.dart';
 import 'package:peminjaman_alat/views/peminjam_view/keranjang_view.dart';
+import 'package:peminjaman_alat/views/peminjam_view/pinjaman_view.dart';
 
 class HomePeminjam extends GetView<HomePeminjamanController> {
   const HomePeminjam({super.key});
@@ -17,7 +18,7 @@ class HomePeminjam extends GetView<HomePeminjamanController> {
         backgroundColor: AppColors.background,
         body: TabBarView(
           controller: controller.tab,
-          children: [HomePeminjamanProduct(), KeranjangView(), Profile()],
+          children: [HomePeminjamanProduct(), KeranjangView(), PinjamanView(),Profile()],
         ),
         bottomNavigationBar: SafeArea(
           child: Container(
@@ -28,6 +29,10 @@ class HomePeminjam extends GetView<HomePeminjamanController> {
               unselectedLabelColor: Colors.grey,
               indicatorColor: AppColors.primary,
               labelColor: AppColors.primary,
+              labelStyle: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 10,
+              ),
               tabs: controller.pages,
             ),
           ),

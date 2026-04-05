@@ -32,13 +32,6 @@ class KeranjangProvider {
 
     batch.set(docTransRef, dataTransfer);
 
-    for (var item in items) {
-      final docProduct = FirebaseFirestore.instance
-          .collection('alat')
-          .doc(item['productId']);
-      batch.update(docProduct, {'stok': FieldValue.increment(-item['qty'])});
-    }
-
     try{
       await batch.commit();
     }catch(error){

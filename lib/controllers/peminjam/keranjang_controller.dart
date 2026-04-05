@@ -111,12 +111,13 @@ class KeranjangController extends GetxController {
     DateTime now,
     int duration,
     DateTime tenggat,
+    String gambar
   ) async {
     if (qty == 0) return;
     isLoadingDetail.value = true;
     try {
       final data = [
-        {'productId': id, 'nama': nama, 'qty': qty},
+        {'productId': id, 'nama': nama, 'qty': qty, 'gambar': gambar},
       ];
 
       await _provider.transaction(
