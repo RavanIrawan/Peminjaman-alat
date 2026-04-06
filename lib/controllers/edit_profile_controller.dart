@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'dart:io';
-import 'package:peminjaman_alat/controllers/profile_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:peminjaman_alat/providers/edit_profile_provider.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
@@ -17,14 +17,14 @@ class EditProfileController extends GetxController {
   final isUploading = false.obs;
   final isEditEmail = false.obs;
   final isLoading = false.obs;
-  final profileC = Get.find<ProfileController>();
+  final authC = Get.find<AuthController>();
   final _provider = Get.find<EditProfileProvider>();
   Rx<File?> imageFile = Rx<File?>(null);
 
   @override
   void onInit() {
-    nameText.text = profileC.currentUser.value?.nama ?? 'Guest';
-    emailText.text = profileC.currentUser.value?.email ?? 'Geust@gmail.com';
+    nameText.text = authC.userWithModel.value?.nama ?? 'Guest';
+    emailText.text = authC.userWithModel.value?.email ?? 'Geust@gmail.com';
 
     super.onInit();
   }
@@ -110,15 +110,15 @@ class EditProfileController extends GetxController {
       final pickedImageurl = await uploadIMageToCloudinary();
 
       final String? finalImageUrl =
-          pickedImageurl ?? profileC.currentUser.value?.profile;
+          pickedImageurl ?? authC.userWithModel.value?.profile;
 
-      final id = profileC.userId;
+      final id = authC.userWithModel.value?.id;
       await _provider.updateUserInfo(
-        id,
+        id!,
         finalImageUrl,
         nameText.text,
         emailText.text,
-        profileC.currentUser.value?.role ?? 'Peminjam',
+        authC.userWithModel.value?.role ?? 'Peminjam',
       );
     } catch (error) {
       Get.snackbar(

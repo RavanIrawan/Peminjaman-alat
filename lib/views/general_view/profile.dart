@@ -17,7 +17,7 @@ class Profile extends GetView<ProfileController> {
     final authC = Get.find<AuthController>();
     final homeC = Get.find<MainAdminViewController>();
     final nameProf = homeC.getTwoLetters(
-      controller.currentUser.value?.nama ?? 'Guest',
+      authC.userWithModel.value?.nama ?? 'Guest',
     );
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -46,14 +46,14 @@ class Profile extends GetView<ProfileController> {
             child: Column(
               children: [
                 ProfilePicture(
-                  child: controller.currentUser.value?.profile != null
+                  child: authC.userWithModel.value?.profile != null
                       ? Container(
                           width: 130,
                           height: 130,
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
-                                controller.currentUser.value?.profile ?? '',
+                                authC.userWithModel.value?.profile ?? '',
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -70,7 +70,7 @@ class Profile extends GetView<ProfileController> {
                 SizedBox(height: 18),
 
                 Text(
-                  controller.currentUser.value?.nama ?? 'Guest',
+                  authC.userWithModel.value?.nama ?? 'Guest',
                   style: TextStyle(
                     color: AppColors.textPrimary,
                     fontFamily: 'Poppins',
@@ -82,7 +82,7 @@ class Profile extends GetView<ProfileController> {
                 SizedBox(height: 8),
 
                 Text(
-                  controller.currentUser.value?.email ?? 'Guest@gmail.com',
+                  authC.userWithModel.value?.email ?? 'Guest@gmail.com',
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontFamily: 'Poppins',
@@ -101,7 +101,7 @@ class Profile extends GetView<ProfileController> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
-                    controller.currentUser.value?.role ?? 'Peminjam',
+                    authC.userWithModel.value?.role ?? 'Peminjam',
                     style: TextStyle(
                       color: AppColors.primary,
                       fontFamily: 'Poppins',

@@ -9,6 +9,7 @@ import 'package:peminjaman_alat/bindings/peminjam/cancel_peminjaman_binding.dart
 import 'package:peminjaman_alat/bindings/peminjam/detail_alat_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/detail_pinjaman_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/rejected_binding.dart';
+import 'package:peminjaman_alat/bindings/petugas/dashboard_petugas_bindings.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
 import 'package:peminjaman_alat/bindings/users_binding.dart';
 import 'package:peminjaman_alat/views/admin_view/add_new_alat.dart';
@@ -49,6 +50,7 @@ class RoutePage {
       page: () => HomePetugas(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
+      binding: DashboardPetugasBindings(),
     ),
     GetPage(
       name: '/Peminjam-view',
