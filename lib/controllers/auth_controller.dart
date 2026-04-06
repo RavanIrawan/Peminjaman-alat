@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:peminjaman_alat/controllers/peminjam/pinjaman_controller.dart';
 // import 'package:peminjaman_alat/controllers/peminjam/pinjaman_controller.dart';
 import 'package:peminjaman_alat/models/user_model.dart';
+import 'package:peminjaman_alat/providers/user_provider.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:peminjaman_alat/utils/url_default_profile.dart';
 import 'package:peminjaman_alat/views/general_view/login.dart';
@@ -16,6 +17,7 @@ class AuthController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final isLoading = false.obs;
   Rx<User?> user = Rx<User?>(null);
+  Rx<UserModel?> userWithModel = Rx<UserModel?>(null);
   late TextEditingController emailC;
   late TextEditingController passC;
   final isObsecureText = false.obs;
@@ -30,7 +32,7 @@ class AuthController extends GetxController {
 
   late TextEditingController emailReset;
 
-  // final pinjamanC = PinjamanController();
+  final _userProvider = Get.find<UserProvider>();
 
   @override
   void onInit() {
@@ -53,25 +55,19 @@ class AuthController extends GetxController {
     try {
       if (user != null) {
         isLoading.value = true;
-        final userDoc = await _firestore
-            .collection('users')
-            .doc(user.uid)
-            .get();
+        await getCurrentUser();
 
-        if (userDoc.exists && userDoc.data() != null) {
-          String role = userDoc['role'] ?? 'Admin';
+        if (userWithModel.value != null) {
+          String role = userWithModel.value?.role ?? '';
+
+          emailC.clear();
+          passC.clear();
 
           if (role == 'Admin') {
-            emailC.clear();
-            passC.clear();
             Get.offAllNamed('/Admin-view');
           } else if (role == 'Petugas') {
-            emailC.clear();
-            passC.clear();
             Get.offAllNamed('/Petugas-view');
           } else if (role == 'Peminjam') {
-            emailC.clear();
-            passC.clear();
             Get.offAllNamed('/Peminjam-view');
           }
         } else {
@@ -297,7 +293,7 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     final User? currentUser = _auth.currentUser;
-    
+
     if (Get.isRegistered<PinjamanController>()) {
       final pinjamanC = Get.find<PinjamanController>();
 
@@ -305,6 +301,8 @@ class AuthController extends GetxController {
 
       Get.delete<PinjamanController>();
     }
+
+    userWithModel.value = null;
 
     if (currentUser != null) {
       for (var provider in currentUser.providerData) {
@@ -359,6 +357,40 @@ class AuthController extends GetxController {
         icon: Icon(Icons.warning),
         colorText: AppColors.background,
       );
+    }
+  }
+
+  Future<void> getCurrentUser() async {
+    isLoading.value = true;
+    try {
+      final response = await _userProvider.getUser(user.value!.uid);
+
+      final dataUser = response.data() as Map<String, dynamic>;
+
+      final extractedData = UserModel(
+        id: response.id,
+        nama: dataUser['nama'] ?? '',
+        email: dataUser['email'] ?? '',
+        phone: dataUser['phone'] ?? 0,
+        profile: dataUser['profile'] ?? UrlDefaultProfile.url,
+        role: dataUser['role'] ?? 'Peminjam',
+        createdAt: (dataUser['createdAt'] as Timestamp).toDate(),
+      );
+
+      userWithModel.value = extractedData;
+    } catch (error) {
+      Get.snackbar(
+        'Gagal',
+        'Terjadi kesalahan: $error',
+        backgroundColor: AppColors.error,
+        snackPosition: SnackPosition.TOP,
+        animationDuration: Duration(milliseconds: 800),
+        duration: Duration(seconds: 3),
+        icon: Icon(Icons.warning),
+        colorText: AppColors.background,
+      );
+    } finally {
+      isLoading.value = false;
     }
   }
 

@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:peminjaman_alat/controllers/auth_controller.dart';
-import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
+import 'package:peminjaman_alat/controllers/petugas/dashboard_petugas_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
+import 'package:peminjaman_alat/views/general_view/profile.dart';
+import 'package:peminjaman_alat/views/petugas_view/persetujuan_view.dart';
 
-class HomePetugas extends StatelessWidget {
+class HomePetugas extends GetView<DashboardPetugasController> {
   const HomePetugas({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authC = Get.find<AuthController>();
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: Center(child: Text('Petugas')),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        authC.logout();
-      }, child: Icon(Icons.logout),),
+    return DefaultTabController(
+      length: controller.tab.length,
+      child: Scaffold(
+        body: TabBarView(children: [PersetujuanView(), Profile()]),
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(color: AppColors.surface),
+            child: TabBar(
+              unselectedLabelColor: AppColors.textSecondary,
+              indicatorWeight: 5,
+              labelColor: AppColors.primary,
+              indicatorColor: AppColors.primary,
+              labelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 10),
+              tabs: controller.tab,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

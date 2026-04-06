@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'package:peminjaman_alat/controllers/edit_profile_controller.dart';
 import 'package:peminjaman_alat/controllers/main_admin_view_controller.dart';
 import 'package:peminjaman_alat/controllers/profile_controller.dart';
@@ -13,9 +14,10 @@ class EditProfile extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     final profileC = Get.find<ProfileController>();
+    final authC = Get.find<AuthController>();
     final homeC = Get.find<MainAdminViewController>();
     final nameProf = homeC.getTwoLetters(
-      profileC.currentUser.value?.nama ?? 'Guest',
+      authC.userWithModel.value?.nama ?? 'Guest',
     );
     final formKey = GlobalKey<FormState>();
     return Scaffold(
@@ -61,14 +63,14 @@ class EditProfile extends GetView<EditProfileController> {
                                 borderRadius: BorderRadius.circular(95),
                               ),
                             )
-                          : (profileC.currentUser.value?.profile != null
+                          : (authC.userWithModel.value?.profile != null
                                 ? Container(
                                     width: 130,
                                     height: 130,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                          profileC.currentUser.value?.profile ??
+                                          authC.userWithModel.value?.profile ??
                                               '',
                                         ),
                                         fit: BoxFit.cover,

@@ -40,18 +40,13 @@ class HomeAdmin extends GetView<HomeAdminController> {
                   onTap: () {
                     Get.toNamed(Profile.routename);
                   },
-                  child: authC.user.value?.photoURL != null
-                      ? CircleAvatar(
-                          radius: 16,
-                          backgroundColor: Colors.grey,
-                          backgroundImage: NetworkImage(
-                            authC.user.value!.photoURL!,
-                          ),
-                        )
-                      : CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          child: Icon(Icons.person, size: 25),
-                        ),
+                  child: CircleAvatar(
+                    radius: 16,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: NetworkImage(
+                      authC.userWithModel.value?.profile ?? '',
+                    ),
+                  ),
                 ),
               ],
             ),
