@@ -36,7 +36,7 @@ class DetailPinjamanController extends GetxController {
       },
       {
         'icon': Icons.calendar_today,
-        'text': 'Tanggal Pinjam',
+        'text': 'Tanggal Pinjam (Di Setujui Petugas)',
         'colorText': AppColors.textPrimary,
         'textContent': data.value?.tanggalPinjam,
       },

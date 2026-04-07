@@ -6,6 +6,7 @@ import 'package:peminjaman_alat/views/peminjam_view/cancel_peminjaman_view.dart'
 import 'package:peminjaman_alat/views/peminjam_view/pinjaman_diajukan_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/pinjaman_saya_view.dart';
 import 'package:peminjaman_alat/views/peminjam_view/pinjaman_selesai_view.dart';
+import 'package:peminjaman_alat/views/peminjam_view/rejected_view.dart';
 
 class PinjamanView extends GetView<PinjamanViewController> {
   const PinjamanView({super.key});
@@ -42,7 +43,9 @@ class PinjamanView extends GetView<PinjamanViewController> {
               icon: Icon(Icons.delete_sweep, color: AppColors.primary),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(RejectedView.routeName);
+              },
               icon: Icon(Icons.remove_done, color: AppColors.primary),
             ),
           ],
