@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:peminjaman_alat/controllers/peminjam/pinjaman_controller.dart';
+import 'package:peminjaman_alat/controllers/petugas/petugas_controller.dart';
 // import 'package:peminjaman_alat/controllers/peminjam/pinjaman_controller.dart';
 import 'package:peminjaman_alat/models/user_model.dart';
 import 'package:peminjaman_alat/providers/user_provider.dart';
@@ -301,6 +302,12 @@ class AuthController extends GetxController {
 
       Get.delete<PinjamanController>();
     }
+    if(Get.isRegistered<PetugasController>()){
+      final petugasC = Get.find<PetugasController>();
+      petugasC.clearData();
+
+      Get.delete<PetugasController>();
+    }
 
     userWithModel.value = null;
 
@@ -372,7 +379,7 @@ class AuthController extends GetxController {
         nama: dataUser['nama'] ?? '',
         email: dataUser['email'] ?? '',
         phone: dataUser['phone'] ?? 0,
-        profile: dataUser['profile'] ?? UrlDefaultProfile.url,
+        profile: dataUser['profile'],
         role: dataUser['role'] ?? 'Peminjam',
         createdAt: (dataUser['createdAt'] as Timestamp).toDate(),
       );

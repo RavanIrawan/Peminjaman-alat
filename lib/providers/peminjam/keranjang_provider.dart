@@ -7,13 +7,13 @@ class KeranjangProvider {
 
   Future<void> transaction(
     String id,
-    Timestamp tglPinjam,
     int durasi,
-    Timestamp tenggat,
     String status,
     int? denda,
     List<Map<String, dynamic>> items,
     String? alasanPenolakan,
+    String profilePeminjam,
+    String namaPeminjam
   ) async {
     final batch = _reference.batch();
 
@@ -22,12 +22,13 @@ class KeranjangProvider {
     final dataTransfer = {
       'idPeminjam': id,
       'durasiHari': durasi,
-      'tanggalPinjam': tglPinjam,
-      'tenggatWaktu': tenggat,
       'status': status,
       'denda': denda ?? 0,
       'detailPinjaman': items,
       'alasanPenolakan': alasanPenolakan ?? '',
+      'tanggalPengajuan': FieldValue.serverTimestamp(),
+      'profilePeminjam': profilePeminjam,
+      'namaPeminjam': namaPeminjam,
     };
 
     batch.set(docTransRef, dataTransfer);

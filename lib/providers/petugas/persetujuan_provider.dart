@@ -5,8 +5,12 @@ class PersetujuanProvider {
     'peminjaman',
   );
 
-  Future<void> acceptPeminjaman(String id) async {
-    await _reference.doc(id).update({'status': 'diPinjam'});
+  Future<void> acceptPeminjaman(String id, Timestamp tglPinjam, Timestamp tenggatWaktu) async {
+    await _reference.doc(id).update({
+      'status': 'diPinjam',
+      'tanggalPinjam': tglPinjam,
+      'tenggatWaktu': tenggatWaktu,
+      });
   }
 
   Future<void> rejectPeminjaman(
@@ -16,7 +20,8 @@ class PersetujuanProvider {
   ) async {
     await _reference.doc(id).update({
       'tanggalDitolak': tanggalDitolak,
-      'alasanDitolak': alasan,
+      'status': 'di_tolak',
+      'alasanPenolakan': alasan,
     });
   }
 }

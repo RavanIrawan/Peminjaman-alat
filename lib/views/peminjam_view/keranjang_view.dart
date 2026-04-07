@@ -4,7 +4,6 @@ import 'package:peminjaman_alat/controllers/peminjam/keranjang_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:intl/intl.dart';
 
 class KeranjangView extends StatefulWidget {
   const KeranjangView({super.key});
@@ -380,11 +379,11 @@ class _KeranjangViewState extends State<KeranjangView>
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'tenggat pengembalian'.toUpperCase(),
+                              'Harap di baca'.toUpperCase(),
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: 'Poppins',
@@ -397,20 +396,6 @@ class _KeranjangViewState extends State<KeranjangView>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Obx(
-                                () => Text(
-                                  DateFormat(
-                                    'dd MMMM yyyy',
-                                    'id_ID',
-                                  ).format(_keranjangC.tenggatWaktu),
-                                  style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontFamily: 'Poppins',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
 
                               Container(
                                 padding: EdgeInsets.all(5),

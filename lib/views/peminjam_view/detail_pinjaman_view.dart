@@ -127,7 +127,7 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                     final dataText = e['text'] as String;
                     final dataIcon = e['icon'] as IconData;
                     final colorText = e['colorText'] as Color;
-                    final textContent = e['textContent'] as DateTime;
+                    final textContent = e['textContent'] as DateTime?;
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Row(
@@ -163,7 +163,11 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                                 ),
                               ),
                               Text(
-                                DateFormat('dd MMM yyyy').format(textContent),
+                                textContent == null
+                                    ? '-'
+                                    : DateFormat(
+                                        'dd MMM yyyy',
+                                      ).format(textContent),
                                 style: TextStyle(
                                   color: colorText,
                                   fontFamily: 'Inter',
@@ -296,9 +300,11 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                   ),
                 ),
                 subTitle: Text(
-                  DateFormat(
-                    'dd MMM yyyy',
-                  ).format(controller.data.value!.tanggalPinjam),
+                  controller.data.value?.tanggalPengajuan == null
+                      ? '-'
+                      : DateFormat('dd MMM yyyy').format(
+                          controller.data.value!.tanggalPengajuan,
+                        ),
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontFamily: 'Inter',

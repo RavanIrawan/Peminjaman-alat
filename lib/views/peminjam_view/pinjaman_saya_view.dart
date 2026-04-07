@@ -193,9 +193,9 @@ class _PinjamanSayaViewState extends State<PinjamanSayaView>
                                   ),
                                 ),
                                 Text(
-                                  DateFormat(
-                                    'dd MMM yyyy',
-                                  ).format(dataPinjaman.tenggatWaktu),
+                                  DateFormat('dd MMM yyyy').format(
+                                    dataPinjaman.tenggatWaktu ?? DateTime.now(),
+                                  ),
                                   style: TextStyle(
                                     color: checkTenggatTrue
                                         ? (dataPinjaman.status ==

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:peminjaman_alat/utils/url_default_profile.dart';
 
 class UserModel {
   String? id;
@@ -25,7 +24,7 @@ class UserModel {
       'nama': nama,
       'email': email,
       'role': role,
-      'profile': profile ?? UrlDefaultProfile.url,
+      'profile': profile,
       'phone': phone ?? 0,
       'createdAt': FieldValue.serverTimestamp(),
     };

@@ -29,10 +29,13 @@ class _PinjamanDiajukanViewState extends State<PinjamanDiajukanView>
           padding: const EdgeInsets.all(10.0),
           child: Obx(() {
             if (pinjamanC.dataPeminjamanDiAjukan.isEmpty) {
-              return Empetystate(
-                title: 'Belum Ada Riwayat',
-                subTitle:
-                    'Barang yang sedang di ajukan/menunggu persetujuan akan muncul di halaman ini.',
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: Empetystate(
+                  title: 'Belum Ada Riwayat',
+                  subTitle:
+                      'Barang yang sedang di ajukan/menunggu persetujuan akan muncul di halaman ini.',
+                ),
               );
             }
             if (pinjamanC.isLoading.value) {
@@ -190,7 +193,7 @@ class _PinjamanDiajukanViewState extends State<PinjamanDiajukanView>
                                       Text(
                                         DateFormat(
                                           'dd MMM yyyy',
-                                        ).format(dataPinjaman.tanggalPinjam),
+                                        ).format(dataPinjaman.tanggalPengajuan),
                                         style: TextStyle(
                                           color: AppColors.textSecondary,
                                           fontFamily: 'Inter',

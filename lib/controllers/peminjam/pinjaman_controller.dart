@@ -8,7 +8,6 @@ import 'package:peminjaman_alat/providers/peminjam/pinjaman_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:lottie/lottie.dart';
-// import 'package:peminjaman_alat/utils/saved_data_dialog.dart';
 
 class PinjamanController extends GetxController {
   StreamSubscription? _streamSubscription;
@@ -16,6 +15,7 @@ class PinjamanController extends GetxController {
   final dataPeminjaman = <PeminjamanModel>[].obs;
   final dataPeminjamanDiAjukan = <PeminjamanModel>[].obs;
   final dataPeminjamanSelesai = <PeminjamanModel>[].obs;
+  final dataPeminjamanDitolak = <PeminjamanModel>[].obs;
 
   final _provider = Get.find<PinjamanProvider>();
   final _authC = Get.find<AuthController>();
@@ -41,6 +41,7 @@ class PinjamanController extends GetxController {
     dataPeminjaman.clear();
     dataPeminjamanDiAjukan.clear();
     dataPeminjamanSelesai.clear();
+    dataPeminjamanDitolak.clear();
   }
 
   bool checkTenggatWaktu(String id) {
@@ -48,7 +49,7 @@ class PinjamanController extends GetxController {
     DateTime now = DateTime(currentDay.year, currentDay.month, currentDay.day);
     if (index != -1) {
       final prodId = data[index];
-      if (now.isAfter(prodId.tenggatWaktu)) {
+      if (now.isAfter(prodId.tenggatWaktu ?? DateTime.now())) {
         return true;
       }
     }
@@ -68,6 +69,7 @@ class PinjamanController extends GetxController {
         dataPeminjaman.clear();
         dataPeminjamanDiAjukan.clear();
         dataPeminjamanSelesai.clear();
+        dataPeminjamanDitolak.clear();
 
         for (var dataRes in event.docs) {
           final res = dataRes.data() as Map<String, dynamic>;
@@ -90,19 +92,24 @@ class PinjamanController extends GetxController {
             durasi: res['durasiHari'] ?? 0,
             idPeminjam: res['idPeminjam'] ?? '',
             status: res['status'] ?? '',
+            tanggalPengajuan: res['tanggalPengajuan'] != null
+                ? (res['tanggalPengajuan'] as Timestamp).toDate()
+                : DateTime.now(),
             tanggalKembali: res['tanggalKembali'] != null
                 ? (res['tanggalKembali'] as Timestamp).toDate()
                 : null,
             tanggalPinjam: res['tanggalPinjam'] != null
                 ? (res['tanggalPinjam'] as Timestamp).toDate()
-                : DateTime.now(),
+                : null,
             tenggatWaktu: res['tenggatWaktu'] != null
                 ? (res['tenggatWaktu'] as Timestamp).toDate()
-                : DateTime.now(),
+                : null,
             alasanPenolakan: res['alasanPenolakan'] ?? '',
             tanggalDitolak: res['tanggalDitolak'] == null
                 ? null
                 : (res['tanggalDitolak'] as Timestamp).toDate(),
+            profilePeminjam: res['profilePeminjam'],
+            namaPeminjam: res['namaPeminjam'] ?? '',
           );
 
           data.add(peminjaman);
@@ -114,6 +121,8 @@ class PinjamanController extends GetxController {
             dataPeminjaman.add(peminjaman);
           } else if (peminjaman.status == 'selesai') {
             dataPeminjamanSelesai.add(peminjaman);
+          } else if (peminjaman.status == 'di_tolak') {
+            dataPeminjamanDitolak.add(peminjaman);
           }
         }
       });
