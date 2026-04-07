@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'package:peminjaman_alat/controllers/peminjam/home_peminjaman_product_controller.dart';
@@ -18,9 +17,9 @@ class KeranjangController extends GetxController {
   final isLoadingDetail = false.obs;
   final durasi = [1, 2, 3, 4, 5, 6, 7];
   Rx<int?> selectedDuration = Rx<int?>(3);
-  final now = DateTime.now().obs;
+  // final now = DateTime.now().obs;
 
-  get tenggatWaktu => now.value.add(Duration(days: selectedDuration.value!));
+  // get tenggatWaktu => now.value.add(Duration(days: selectedDuration.value!));
 
   int get itemLength => cartItems.length;
 
@@ -108,9 +107,7 @@ class KeranjangController extends GetxController {
     String id,
     String nama,
     int qty,
-    DateTime now,
     int duration,
-    DateTime tenggat,
     String gambar,
   ) async {
     if (qty == 0) return;
@@ -122,13 +119,13 @@ class KeranjangController extends GetxController {
 
       await _provider.transaction(
         _authC.user.value!.uid,
-        Timestamp.fromDate(now),
         duration,
-        Timestamp.fromDate(tenggat),
         'menunggu_persetujuan',
         0,
         data,
         '',
+        '${_authC.userWithModel.value?.profile}',
+        '${_authC.userWithModel.value?.nama}',
       );
       SavedDataDialog().showSavedDataDialog(
         'Pengajuan Berhasil!',
@@ -159,13 +156,13 @@ class KeranjangController extends GetxController {
 
       await _provider.transaction(
         _authC.user.value!.uid,
-        Timestamp.fromDate(now.value),
         selectedDuration.value!,
-        Timestamp.fromDate(tenggatWaktu),
         'menunggu_persetujuan',
         0,
         data,
         '',
+        '${_authC.userWithModel.value?.profile}',
+        '${_authC.userWithModel.value?.nama}',
       );
       cartItems.clear();
 

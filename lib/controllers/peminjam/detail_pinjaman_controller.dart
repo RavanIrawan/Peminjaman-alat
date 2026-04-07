@@ -22,12 +22,18 @@ class DetailPinjamanController extends GetxController {
     );
 
     tengatBersih = DateTime(
-      data.value!.tenggatWaktu.year,
-      data.value!.tenggatWaktu.month,
-      data.value!.tenggatWaktu.day,
+      data.value?.tenggatWaktu?.year ?? DateTime.now().year,
+      data.value?.tenggatWaktu?.month ?? DateTime.now().month,
+      data.value?.tenggatWaktu?.day ?? DateTime.now().day,
     );
     DateTime now = DateTime(currentDay.year, currentDay.month, currentDay.day);
     iconAndTextView.assignAll([
+      {
+        'icon': Icons.schedule_send,
+        'text': 'Tanggal Pengajuan',
+        'colorText': AppColors.primary,
+        'textContent': data.value?.tanggalPengajuan,
+      },
       {
         'icon': Icons.calendar_today,
         'text': 'Tanggal Pinjam',
@@ -37,9 +43,9 @@ class DetailPinjamanController extends GetxController {
       {
         'icon': Icons.access_alarm,
         'text': 'Jatuh Tempo',
-        'colorText': now.isAfter(tengatBersih!)
-            ? AppColors.error
-            : AppColors.primary,
+        'colorText': data.value?.tenggatWaktu != null
+            ? (now.isAfter(tengatBersih!) ? AppColors.error : AppColors.primary)
+            : AppColors.textPrimary,
         'textContent': data.value?.tenggatWaktu,
       },
     ]);

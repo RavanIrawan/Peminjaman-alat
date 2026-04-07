@@ -28,6 +28,12 @@ class PetugasController extends GetxController {
     super.onClose();
   }
 
+  void clearData() {
+    _streamSubscription?.cancel();
+    allData.clear();
+    allDataPersetujuan.clear();
+  }
+
   void getAllData() {
     isLoading.value = true;
 
@@ -36,6 +42,7 @@ class PetugasController extends GetxController {
 
       _streamSubscription = _provider.getAllPeminjaman().listen((event) {
         allData.clear();
+        allDataPersetujuan.clear();
         for (var data in event.docs) {
           final dataRes = data.data() as Map<String, dynamic>;
           final detailData = <DetailPeminjaman>[];
@@ -57,12 +64,15 @@ class PetugasController extends GetxController {
             durasi: dataRes['durasiHari'] ?? 0,
             idPeminjam: dataRes['idPeminjam'] ?? '',
             status: dataRes['status'] ?? 'menunggu_persetujuan',
+            tanggalPengajuan: dataRes['tanggalpengajuan'] != null
+                ? (dataRes['tanggalPengajuan'] as Timestamp).toDate()
+                : DateTime.now(),
             tanggalPinjam: dataRes['tanggalPinjam'] != null
                 ? (dataRes['tanggalPinjam'] as Timestamp).toDate()
-                : DateTime.now(),
+                : null,
             tenggatWaktu: dataRes['tenggatWaktu'] != null
                 ? (dataRes['tenggatWaktu'] as Timestamp).toDate()
-                : DateTime.now(),
+                : null,
             alasanPenolakan: dataRes['alasanPenolakan'] ?? '',
             tanggalDitolak: dataRes['tanggalDitolak'] != null
                 ? (dataRes['tanggalDitolak'] as Timestamp).toDate()
@@ -70,6 +80,8 @@ class PetugasController extends GetxController {
             tanggalKembali: dataRes['tanggalKembali'] != null
                 ? (dataRes['tanggalKembali'] as Timestamp).toDate()
                 : null,
+            profilePeminjam: dataRes['profilePeminjam'],
+            namaPeminjam: dataRes['namaPeminjam'] ?? 'Guest',
           );
 
           allData.add(dataPinjaman);

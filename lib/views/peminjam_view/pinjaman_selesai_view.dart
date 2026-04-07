@@ -163,7 +163,7 @@ class _PinjamanSelesaiViewState extends State<PinjamanSelesaiView>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Jatuh Tempo: ${DateFormat('d MMM yyyy').format(dataPinjaman.tenggatWaktu)}',
+                              'Jatuh Tempo: ${DateFormat('d MMM yyyy').format(dataPinjaman.tenggatWaktu ?? DateTime.now())}',
                               style: TextStyle(
                                 color: AppColors.textPrimary,
                                 fontFamily: 'Inter',

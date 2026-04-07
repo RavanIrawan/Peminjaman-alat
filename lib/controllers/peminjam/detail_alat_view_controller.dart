@@ -11,9 +11,9 @@ class DetailAlatViewController extends GetxController {
   final qty = 0.obs;
   final durasi = [1, 2, 3, 4, 5, 6, 7];
   Rx<int?> selectedDuration = Rx<int?>(3);
-  final now = DateTime.now().obs;
+  // final now = DateTime.now().obs;
 
-  get tenggatWaktu => now.value.add(Duration(days: selectedDuration.value!));
+  // get tenggatWaktu => now.value.add(Duration(days: selectedDuration.value!));
 
   @override
   void onInit() {
