@@ -198,11 +198,12 @@ class _PinjamanSayaViewState extends State<PinjamanSayaView>
                                   ),
                                   style: TextStyle(
                                     color: checkTenggatTrue
-                                        ? (dataPinjaman.status ==
-                                                  'di_kembalikan'
-                                              ? AppColors.primaryDark
-                                              : AppColors.error)
-                                        : AppColors.primary,
+                                        ? AppColors.error
+                                        : (DateTime.now().isAtSameMomentAs(
+                                                dataPinjaman.tenggatWaktu ?? DateTime.now(),
+                                              )
+                                              ? AppColors.warning
+                                              : AppColors.primary),
                                     fontFamily: 'Inter',
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,

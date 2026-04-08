@@ -393,24 +393,46 @@ class _KeranjangViewState extends State<KeranjangView>
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  color: AppColors.primary.withValues(
-                                    alpha: 0.1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                child: Icon(
-                                  Icons.error,
-                                  color: AppColors.primary,
-                                ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 16, bottom: 24),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: AppColors.warning.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: AppColors.warning.withValues(alpha: 0.3),
                               ),
-                            ],
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    color: Colors.amberAccent.withValues(
+                                      alpha: 0.1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Icon(
+                                    Icons.error,
+                                    color: AppColors.warning,
+                                  ),
+                                ),
+                                SizedBox(width: 5),
+                                Expanded(
+                                  child: Text(
+                                    'Harap kembalikan alat sesuai dengan tenggat waktu yang dipilih. Keterlambatan pengembalian atau kerusakan pada alat dapat dikenakan denda sesuai peraturan yang berlaku.',
+                                    style: TextStyle(
+                                      color: Colors.orange[800],
+                                      fontFamily: 'Inter',
+                                      fontSize: 12,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

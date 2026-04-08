@@ -52,7 +52,7 @@ class _PersetujuanViewState extends State<PersetujuanView>
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              
+
                 Obx(() {
                   if (persetujuanC.isLoading.value) {
                     return Center(
@@ -61,7 +61,7 @@ class _PersetujuanViewState extends State<PersetujuanView>
                       ),
                     );
                   }
-              
+
                   if (petugasC.allDataPersetujuan.isNotEmpty) {
                     return Container(
                       padding: EdgeInsets.symmetric(
@@ -101,13 +101,17 @@ class _PersetujuanViewState extends State<PersetujuanView>
                 );
               }
               return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 itemBuilder: (context, index) {
                   final dataPersetujuan = petugasC.allDataPersetujuan[index];
                   final currentTime = timeago.format(
                     dataPersetujuan.tanggalPengajuan,
+                    locale: 'id',
                   );
-              
+
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
@@ -146,8 +150,7 @@ class _PersetujuanViewState extends State<PersetujuanView>
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       dataPersetujuan.namaPeminjam,
@@ -205,9 +208,7 @@ class _PersetujuanViewState extends State<PersetujuanView>
                                     Padding(
                                       padding: const EdgeInsets.all(5.0),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                          12,
-                                        ),
+                                        borderRadius: BorderRadius.circular(12),
                                         child: Image.network(
                                           data.gambar,
                                           width: 40,
@@ -334,6 +335,7 @@ class _PersetujuanViewState extends State<PersetujuanView>
                                     persetujuanC.acceptPeminjamanProduct(
                                       dataPersetujuan.id ?? '',
                                       dataPersetujuan.durasi,
+                                      dataPersetujuan,
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(

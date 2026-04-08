@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/controllers/petugas/petugas_controller.dart';
+import 'package:peminjaman_alat/models/peminjaman_model.dart';
 import 'package:peminjaman_alat/providers/petugas/persetujuan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
@@ -17,7 +18,7 @@ class PersetujuanController extends GetxController {
     super.onClose();
   }
 
-  Future<void> acceptPeminjamanProduct(String id, int durasi) async {
+  Future<void> acceptPeminjamanProduct(String id, int durasi, PeminjamanModel data) async {
     isLoading.value = true;
     final tanggalPinjam = DateTime.now();
     final tenggatWaktu = tanggalPinjam.add(Duration(days: durasi));
@@ -27,6 +28,7 @@ class PersetujuanController extends GetxController {
         id,
         Timestamp.fromDate(tanggalPinjam),
         Timestamp.fromDate(tenggatWaktu),
+        data,
       );
     } catch (error) {
       Get.snackbar(
