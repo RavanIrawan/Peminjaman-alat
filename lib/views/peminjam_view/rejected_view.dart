@@ -13,11 +13,11 @@ class RejectedView extends GetView<RejectedController> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.primary.withValues(alpha: 0.1),
+        backgroundColor: AppColors.surface,
         title: Text(
           'Riwayat Ditolak',
           style: TextStyle(
-            color: AppColors.primary,
+            color: AppColors.textPrimary,
             fontFamily: 'Inter',
             fontSize: 18,
           ),

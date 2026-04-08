@@ -54,14 +54,6 @@ class _PersetujuanViewState extends State<PersetujuanView>
                 ),
 
                 Obx(() {
-                  if (persetujuanC.isLoading.value) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.primary,
-                      ),
-                    );
-                  }
-
                   if (petugasC.allDataPersetujuan.isNotEmpty) {
                     return Container(
                       padding: EdgeInsets.symmetric(
@@ -90,6 +82,11 @@ class _PersetujuanViewState extends State<PersetujuanView>
           SizedBox(height: 15),
           Expanded(
             child: Obx(() {
+              if (persetujuanC.isLoading.value) {
+                return Center(
+                  child: CircularProgressIndicator(color: AppColors.primary),
+                );
+              }
               if (petugasC.allData.isEmpty ||
                   petugasC.allDataPersetujuan.isEmpty) {
                 return Center(

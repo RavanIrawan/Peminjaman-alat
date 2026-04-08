@@ -3,6 +3,7 @@ import 'package:get/state_manager.dart';
 import 'package:peminjaman_alat/controllers/petugas/dashboard_petugas_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:peminjaman_alat/views/general_view/profile.dart';
+import 'package:peminjaman_alat/views/petugas_view/pengembalian_view.dart';
 import 'package:peminjaman_alat/views/petugas_view/persetujuan_view.dart';
 
 class HomePetugas extends GetView<DashboardPetugasController> {
@@ -13,7 +14,7 @@ class HomePetugas extends GetView<DashboardPetugasController> {
     return DefaultTabController(
       length: controller.tab.length,
       child: Scaffold(
-        body: TabBarView(children: [PersetujuanView(), Profile()]),
+        body: TabBarView(children: [PersetujuanView(), PengembalianView(), Profile()]),
         bottomNavigationBar: SafeArea(
           child: Container(
             decoration: BoxDecoration(color: AppColors.surface),
