@@ -14,6 +14,9 @@ class PinjamanProvider {
   }
 
   Future<void> returProduct(String id) async {
-    await _reference.doc(id).update({'status': 'di_kembalikan'});
+    await _reference.doc(id).update({
+      'status': 'di_kembalikan',
+      'tanggalKembali': FieldValue.serverTimestamp(),
+      });
   }
 }

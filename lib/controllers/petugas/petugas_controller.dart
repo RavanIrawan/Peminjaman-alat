@@ -12,6 +12,7 @@ import 'package:peminjaman_alat/utils/url_default_profile.dart';
 class PetugasController extends GetxController {
   final allData = <PeminjamanModel>[].obs;
   final allDataPersetujuan = <PeminjamanModel>[].obs;
+  final allDataDiPinjam = <PeminjamanModel>[].obs;
   StreamSubscription? _streamSubscription;
   final _provider = Get.find<PetugasProvider>();
   final isLoading = false.obs;
@@ -88,6 +89,9 @@ class PetugasController extends GetxController {
 
           if (dataPinjaman.status == 'menunggu_persetujuan') {
             allDataPersetujuan.add(dataPinjaman);
+          } else if (dataPinjaman.status == 'diPinjam' ||
+              dataPinjaman.status == 'di_kembalikan') {
+            allDataDiPinjam.add(dataPinjaman);
           }
         }
       });
