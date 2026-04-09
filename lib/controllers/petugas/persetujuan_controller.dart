@@ -120,6 +120,10 @@ class PersetujuanController extends GetxController {
 
   void showBottomSheetsForReject(String id) {
     Get.bottomSheet(
+      isScrollControlled: true,
+      enterBottomSheetDuration: Duration(milliseconds: 400),
+      exitBottomSheetDuration: Duration(milliseconds: 300),
+      backgroundColor: Colors.transparent,
       SingleChildScrollView(
         physics: NeverScrollableScrollPhysics(),
         child: Container(

@@ -134,6 +134,10 @@ class _PengembalianViewState extends State<PengembalianView>
                     final countTheDaysLate = pengembalianC.countTheDaysLate(
                       data.tenggatWaktu ?? DateTime.now(),
                     );
+                    final fine = pengembalianC.countMonetaryFine(
+                      data.tanggalKembali ?? DateTime.now(),
+                      data.tenggatWaktu ?? DateTime.now(),
+                    );
                     final now = DateTime(
                       pengembalianC.now.year,
                       pengembalianC.now.month,
@@ -346,12 +350,25 @@ class _PengembalianViewState extends State<PengembalianView>
                               onPressed: () {
                                 if (data.status == 'di_kembalikan') {
                                   pengembalianC
-                                      .returnProductWithStatusCompleted(
+                                      .showBottomSheetsForReturnProduct(
                                         data.id!,
                                         data.tanggalKembali!,
                                         data.tenggatWaktu!,
+                                        data.detailPinjaman,
+                                        data.namaPeminjam,
+                                        now,
+                                        countTheDaysLate,
+                                        fine,
                                       );
                                 }
+                                // if (data.status == 'di_kembalikan') {
+                                //   pengembalianC
+                                //       .returnProductWithStatusCompleted(
+                                //         data.id!,
+                                //         data.tanggalKembali!,
+                                //         data.tenggatWaktu!,
+                                //       );
+                                // }
                               },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
