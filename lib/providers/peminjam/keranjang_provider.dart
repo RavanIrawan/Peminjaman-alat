@@ -14,6 +14,7 @@ class KeranjangProvider {
     String? alasanPenolakan,
     String profilePeminjam,
     String namaPeminjam,
+    String catatanAdmin,
   ) async {
     final batch = _reference.batch();
 
@@ -29,6 +30,7 @@ class KeranjangProvider {
       'tanggalPengajuan': FieldValue.serverTimestamp(),
       'profilePeminjam': profilePeminjam,
       'namaPeminjam': namaPeminjam,
+      'catatanAdmin': catatanAdmin.trim(),
     };
 
     batch.set(docTransRef, dataTransfer);

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'package:peminjaman_alat/controllers/petugas/petugas_controller.dart';
 import 'package:peminjaman_alat/models/detail_peminjaman.dart';
 import 'package:peminjaman_alat/providers/petugas/pengembalian_provider.dart';
@@ -9,6 +10,7 @@ import 'package:peminjaman_alat/utils/convert_to_rupiah.dart';
 class PengembalianController extends GetxController {
   final _provider = Get.find<PengembalianProvider>();
   final petugasC = Get.find<PetugasController>();
+  final _authC = Get.find<AuthController>();
   final isLoading = false.obs;
   final now = DateTime.now();
 
@@ -59,9 +61,17 @@ class PengembalianController extends GetxController {
   ) async {
     isLoading.value = true;
     final fineAmount = countMonetaryFine(tanggalKembali, tenggatWaktu);
+    final index = petugasC.allData.indexWhere((element) => element.id == id);
 
     try {
-      await _provider.productReturn(id, fineAmount);
+      await _provider.productReturn(
+        id,
+        fineAmount,
+        petugasC.allData[index].detailPinjaman,
+        _authC.userWithModel.value?.id ?? '',
+        _authC.userWithModel.value?.nama ?? '',
+        petugasC.allData[index].namaPeminjam,
+      );
     } catch (error) {
       Get.snackbar(
         'Error',

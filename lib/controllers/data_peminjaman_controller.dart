@@ -10,14 +10,59 @@ import 'package:peminjaman_alat/utils/url_default_profile.dart';
 class DataPeminjamanController extends GetxController {
   final _provider = Get.find<DataPeminjamanProvider>();
   final dataPeminjaman = <PeminjamanModel>[].obs;
+  final dataPeminjamanSementara = <PeminjamanModel>[].obs;
   final dataAll = <PeminjamanModel>[].obs;
   final isLoading = false.obs;
+  final listStatus = ['selesai', 'diPinjam', 'di_kembalikan'];
+  Rx<String?> selectedStatus = Rx<String?>(null);
+  final keyword = ''.obs;
+  final isSearch = false.obs;
 
   @override
   void onInit() async {
     super.onInit();
     await getAllData();
     getDataWithStatusDiPinjam();
+  }
+
+  void searchData(String value) {
+    keyword.value = value;
+    applyFilter();
+  }
+
+  void selectStatus(String value) {
+    if (selectedStatus.value == value) {
+      selectedStatus.value = null;
+    } else {
+      selectedStatus.value = value;
+    }
+    applyFilter();
+  }
+
+  void applyFilter() {
+    var filetredData = dataPeminjamanSementara.toList();
+
+    if (selectedStatus.value != null) {
+      filetredData = filetredData
+          .where((element) => element.status == selectedStatus.value)
+          .toList();
+    }
+
+    if (keyword.isNotEmpty) {
+      filetredData = filetredData
+          .where(
+            (element) => element.namaPeminjam.toLowerCase().contains(
+              keyword.toLowerCase(),
+            ),
+          )
+          .toList();
+    }
+
+    if (filetredData.isEmpty) {
+      dataPeminjaman.clear();
+    } else {
+      dataPeminjaman.assignAll(filetredData);
+    }
   }
 
   void getDataWithStatusDiPinjam() {
@@ -31,6 +76,7 @@ class DataPeminjamanController extends GetxController {
         .toList();
 
     dataPeminjaman.addAll(dataWithStatusDiPinjam);
+    dataPeminjamanSementara.addAll(dataWithStatusDiPinjam);
   }
 
   Future<void> getAllData() async {

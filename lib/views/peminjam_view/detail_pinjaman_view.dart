@@ -184,6 +184,68 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                 ),
               ),
               SizedBox(height: 15),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (controller.data.value?.catatanAdmin != null &&
+                      controller.data.value!.catatanAdmin!.isNotEmpty)
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.amber.withValues(
+                          alpha: 0.1,
+                        ), // Warna kuning peringatan yang lembut
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.amber.withValues(alpha: 0.5),
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.info_outline,
+                            color: Colors.amber,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Perubahan oleh Admin',
+                                  style: TextStyle(
+                                    color: Colors
+                                        .amber, 
+                                    fontFamily: 'Inter',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  controller
+                                      .data
+                                      .value!
+                                      .catatanAdmin!, 
+                                  style: TextStyle(
+                                    color: Colors.brown.shade800,
+                                    fontFamily: 'Inter',
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+              SizedBox(height: 15),
               Text(
                 'Daftar Alat (${controller.data.value?.detailPinjaman.length} Item)',
                 style: TextStyle(
@@ -302,9 +364,9 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                 subTitle: Text(
                   controller.data.value?.tanggalPengajuan == null
                       ? '-'
-                      : DateFormat('dd MMM yyyy').format(
-                          controller.data.value!.tanggalPengajuan,
-                        ),
+                      : DateFormat(
+                          'dd MMM yyyy',
+                        ).format(controller.data.value!.tanggalPengajuan),
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontFamily: 'Inter',

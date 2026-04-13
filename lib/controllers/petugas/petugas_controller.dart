@@ -83,6 +83,7 @@ class PetugasController extends GetxController {
                 : null,
             profilePeminjam: dataRes['profilePeminjam'],
             namaPeminjam: dataRes['namaPeminjam'] ?? 'Guest',
+            catatanAdmin: dataRes['catatanAdmin'] ?? ''
           );
 
           allData.add(dataPinjaman);

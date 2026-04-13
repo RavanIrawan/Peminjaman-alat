@@ -110,6 +110,7 @@ class PinjamanController extends GetxController {
                 : (res['tanggalDitolak'] as Timestamp).toDate(),
             profilePeminjam: res['profilePeminjam'],
             namaPeminjam: res['namaPeminjam'] ?? '',
+            catatanAdmin: res['catatanAdmin'] ?? '',
           );
 
           data.add(peminjaman);
@@ -241,7 +242,7 @@ class PinjamanController extends GetxController {
       }
 
       try {
-        await _provider.returProduct(id);
+        await _provider.returProduct(id, data[indexData].detailPinjaman);
         Get.defaultDialog(
           barrierDismissible: false,
           backgroundColor: AppColors.surface,

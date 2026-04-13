@@ -17,9 +17,6 @@ class KeranjangController extends GetxController {
   final isLoadingDetail = false.obs;
   final durasi = [1, 2, 3, 4, 5, 6, 7];
   Rx<int?> selectedDuration = Rx<int?>(3);
-  // final now = DateTime.now().obs;
-
-  // get tenggatWaktu => now.value.add(Duration(days: selectedDuration.value!));
 
   int get itemLength => cartItems.length;
 
@@ -126,6 +123,7 @@ class KeranjangController extends GetxController {
         '',
         '${_authC.userWithModel.value?.profile}',
         '${_authC.userWithModel.value?.nama}',
+        ''
       );
       SavedDataDialog().showSavedDataDialog(
         'Pengajuan Berhasil!',
@@ -163,6 +161,7 @@ class KeranjangController extends GetxController {
         '',
         '${_authC.userWithModel.value?.profile}',
         '${_authC.userWithModel.value?.nama}',
+        ''
       );
       cartItems.clear();
 

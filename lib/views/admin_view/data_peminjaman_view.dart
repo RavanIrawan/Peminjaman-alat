@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/controllers/data_peminjaman_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
+import 'package:peminjaman_alat/views/admin_view/edit_pinjaman_view.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class DataPeminjamanView extends GetView<DataPeminjamanController> {
@@ -13,6 +14,11 @@ class DataPeminjamanView extends GetView<DataPeminjamanController> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15))
+        ),
         backgroundColor: AppColors.surface,
         centerTitle: true,
         title: Text(
@@ -24,7 +30,118 @@ class DataPeminjamanView extends GetView<DataPeminjamanController> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        
+        bottom: PreferredSize(
+          preferredSize: Size(
+            double.infinity,
+            100,
+          ),
+          child: Obx(() {
+            return Column(
+              children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: TextField(
+                      onChanged: (value) => controller.searchData(value),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.background.withValues(alpha: 0.1),
+                        hintText: 'search by name...',
+                        border: InputBorder.none,
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: AppColors.textSecondary,
+                            width: 0.2,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: AppColors.textSecondary,
+                            width: 0.2,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: AppColors.textSecondary,
+                            width: 0.2,
+                          ),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: AppColors.textSecondary,
+                            width: 0.2,
+                          ),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: AppColors.textSecondary,
+                            width: 0.2,
+                          ),
+                        ),
+                        prefixIcon: Icon(Icons.manage_search),
+                        hintStyle: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontFamily: 'Inter',
+                          fontSize: 14,
+                        ),
+                        contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10)
+                      ),
+                      cursorColor: AppColors.primary,
+                    ),
+                  ),
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: controller.listStatus.map((e) {
+                    final statusTrue = controller.selectedStatus.value == e;
+
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 8,
+                      ),
+                      child: GestureDetector(
+                        onTap: () => controller.selectStatus(e),
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 400),
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: statusTrue
+                                ? AppColors.primary
+                                : AppColors.textSecondary.withValues(
+                                    alpha: 0.2,
+                                  ),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Text(
+                            e == 'selesai'
+                                ? 'Selesai'
+                                : (e == 'diPinjam'
+                                      ? 'Dipinjam'
+                                      : (e == 'di_kembalikan'
+                                            ? 'Dikembalikan'
+                                            : 'Unkown')),
+                            style: TextStyle(
+                              color: statusTrue
+                                  ? AppColors.surface
+                                  : AppColors.textSecondary,
+                              fontFamily: 'Inter',
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            );
+          }),
+        ),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
@@ -196,21 +313,36 @@ class DataPeminjamanView extends GetView<DataPeminjamanController> {
                               ),
                             ),
                             TextButton(
-                              onPressed: (){},
+                              onPressed: () {
+                                Get.toNamed(
+                                  EditPinjamanView.routeName,
+                                  arguments: data.id,
+                                );
+                              },
                               style: TextButton.styleFrom(
-                                overlayColor: AppColors.primary.withValues(alpha: 0.2),
+                                overlayColor: AppColors.primary.withValues(
+                                  alpha: 0.2,
+                                ),
                               ),
-                            child: Row(
-                              children: [
-                                Text('Edit Data', style: TextStyle(
-                                  color: AppColors.primary,
-                                  fontFamily: 'Inter',
-                                  fontSize: 14,
-                                ),),
-                                SizedBox(width: 5,),
-                                Icon(Icons.arrow_forward_ios, size: 12, color: AppColors.primary,)
-                              ],
-                            ))
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Edit Data',
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontFamily: 'Inter',
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  SizedBox(width: 5),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 12,
+                                    color: AppColors.primary,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ],
