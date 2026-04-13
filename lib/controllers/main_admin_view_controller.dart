@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/views/admin_view/alat_view_admin.dart';
+import 'package:peminjaman_alat/views/admin_view/data_peminjaman_view.dart';
 import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
 import 'package:peminjaman_alat/views/admin_view/users_page.dart';
 
 class MainAdminViewController extends GetxController {
   final List<Tab> tabs = [
     Tab(text: 'Dashboard', icon: Icon(Icons.dashboard),),
+    Tab(text: 'Aktivitas', icon: Icon(Icons.access_time),),
   ];
 
   final Map<String, Map<String, dynamic>> menuCard = {
@@ -37,14 +39,8 @@ class MainAdminViewController extends GetxController {
     'pengembalian': {
       'icon': Icons.move_to_inbox,
       'text': 'Data Pengembalian',
-      'route': '/pengembalian',
+      'route': DataPeminjamanView.routeName,
     },
-
-    'aktivitas': {
-      'icon': Icons.access_time,
-      'text': 'Log Aktivitas',
-      'route': '/aktivitas',
-    }
   };
 
   String getTwoLetters(String name) {

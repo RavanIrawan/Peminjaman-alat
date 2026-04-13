@@ -73,6 +73,8 @@ class PengembalianController extends GetxController {
         icon: Icon(Icons.warning),
         colorText: AppColors.background,
       );
+    } finally {
+      isLoading.value = false;
     }
   }
 

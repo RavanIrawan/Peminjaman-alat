@@ -11,6 +11,8 @@ class PersetujuanProvider {
     Timestamp tglPinjam,
     Timestamp tenggatWaktu,
     PeminjamanModel data,
+    String idUser,
+    String namaPetugas,
   ) async {
     final batch = FirebaseFirestore.instance.batch();
     final docTransRef = _reference.doc(id);
@@ -27,6 +29,19 @@ class PersetujuanProvider {
 
       batch.update(barangRef, {'stok': FieldValue.increment(-dataBarang.qty)});
     }
+
+    final docLogTrans = FirebaseFirestore.instance.collection('logs').doc();
+
+    final dataLog = {
+      'idUser': idUser,
+      'idTransaksi': docTransRef.id,
+      'nama': namaPetugas,
+      'type': 'persetujuan',
+      'aksi': '$namaPetugas menyetujui peminjaman ${docTransRef.id}',
+      'createdAt': FieldValue.serverTimestamp(),
+    };
+
+    batch.set(docLogTrans, dataLog);
 
     try {
       await batch.commit();

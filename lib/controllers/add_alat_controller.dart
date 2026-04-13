@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:peminjaman_alat/controllers/alat_controller.dart';
+import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'package:peminjaman_alat/models/alat_model.dart';
 import 'package:peminjaman_alat/models/kategori_model.dart';
 import 'package:peminjaman_alat/providers/add_alat_provider.dart';
@@ -11,6 +12,7 @@ import 'package:peminjaman_alat/utils/saved_data_dialog.dart';
 
 class AddAlatController extends GetxController {
   final _provider = Get.find<AddAlatProvider>();
+  final _authC = Get.find<AuthController>();
   final isLoading = false.obs;
   final isUploading = false.obs;
   final _imagePicker = ImagePicker();
@@ -24,6 +26,7 @@ class AddAlatController extends GetxController {
   TextEditingController deskText = TextEditingController();
   final isEditMode = false.obs;
   String? idAlat = Get.arguments as String?;
+  AlatModel? dataAlat;
 
   get selectedKategori => kategori.first;
 
@@ -49,15 +52,13 @@ class AddAlatController extends GetxController {
 
       final alatC = Get.find<AlatController>();
 
-      final dataAlat = alatC.allAlat.firstWhere(
-        (element) => element.id == idAlat,
-      );
+      dataAlat = alatC.allAlat.firstWhere((element) => element.id == idAlat);
 
-      nameText.text = dataAlat.namaAlat!;
-      stokText.text = dataAlat.stok!.toString();
-      deskText.text = dataAlat.deskripsi!;
-      kategoriSelect.value = dataAlat.idKategori;
-      oldImageUrl.value = dataAlat.gambar;
+      nameText.text = dataAlat!.namaAlat!;
+      stokText.text = dataAlat!.stok!.toString();
+      deskText.text = dataAlat!.deskripsi!;
+      kategoriSelect.value = dataAlat!.idKategori;
+      oldImageUrl.value = dataAlat!.gambar;
     } else {
       isEditMode.value = false;
       oldImageUrl.value = null;
@@ -120,11 +121,14 @@ class AddAlatController extends GetxController {
             int.parse(stokText.text),
             finalUrlImage,
             deskText.text,
+            _authC.userWithModel.value?.id ?? '',
+            _authC.userWithModel.value?.nama ?? '',
+            dataAlat!,
           );
           SavedDataDialog().showSavedDataDialog(
             'Berhasil',
             'Data Barang barhasil di update',
-            false
+            false,
           );
         } else {
           Get.snackbar(
@@ -267,12 +271,14 @@ class AddAlatController extends GetxController {
         int.parse(stokText.text),
         imageUrl!,
         deskText.text,
+        _authC.userWithModel.value?.id ?? '',
+        _authC.userWithModel.value?.nama ?? '',
       );
 
       SavedDataDialog().showSavedDataDialog(
         'Berhasil',
         'Data Barang telah berhasil disimpan',
-        false
+        false,
       );
     } catch (error) {
       Get.snackbar(

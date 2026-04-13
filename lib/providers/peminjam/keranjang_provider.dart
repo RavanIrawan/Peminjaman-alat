@@ -13,7 +13,7 @@ class KeranjangProvider {
     List<Map<String, dynamic>> items,
     String? alasanPenolakan,
     String profilePeminjam,
-    String namaPeminjam
+    String namaPeminjam,
   ) async {
     final batch = _reference.batch();
 
@@ -33,9 +33,26 @@ class KeranjangProvider {
 
     batch.set(docTransRef, dataTransfer);
 
-    try{
+    final docLogTrans = FirebaseFirestore.instance.collection('logs').doc();
+
+    final barangUtama = items[0];
+
+    final dataLog = {
+      'idUser': id,
+      'idTransaksi': docTransRef.id,
+      'nama': namaPeminjam,
+      'type': 'pengajuan',
+      'aksi': items.length > 1
+          ? '$namaPeminjam mengajukan pinjaman untuk ${barangUtama['nama']} dan ${items.length - 1} alat lainnya.'
+          : '$namaPeminjam mengajukan pinjaman untuk ${barangUtama['nama']}.',
+      'createdAt': FieldValue.serverTimestamp(),
+    };
+
+    batch.set(docLogTrans, dataLog);
+
+    try {
       await batch.commit();
-    }catch(error){
+    } catch (error) {
       throw Exception('Gagal, Terjadi kesalahan');
     }
   }
