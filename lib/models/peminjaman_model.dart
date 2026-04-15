@@ -8,15 +8,16 @@ class PeminjamanModel {
   String idPeminjam;
   String status;
   DateTime tanggalPengajuan;
-  final DateTime? tanggalBarangKembali;
-  final DateTime? tanggalKembali;
-  final DateTime? tanggalPinjam;
-  final DateTime? tenggatWaktu;
-  final String? alasanPenolakan;
-  final DateTime? tanggalDitolak;
+  DateTime? tanggalBarangKembali;
+  DateTime? tanggalKembali;
+  DateTime? tanggalPinjam;
+  DateTime? tenggatWaktu;
+  String? alasanPenolakan;
+  DateTime? tanggalDitolak;
+  DateTime? tanggalDitolakAdmin;
   String profilePeminjam;
   String namaPeminjam;
-  final String? catatanAdmin;
+  String? catatanAdmin;
 
   PeminjamanModel({
     this.id,
@@ -35,5 +36,6 @@ class PeminjamanModel {
     required this.profilePeminjam,
     required this.namaPeminjam,
     this.catatanAdmin,
+    this.tanggalDitolakAdmin,
   });
 }

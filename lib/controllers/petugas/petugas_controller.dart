@@ -86,8 +86,11 @@ class PetugasController extends GetxController {
             namaPeminjam: dataRes['namaPeminjam'] ?? 'Guest',
             catatanAdmin: dataRes['catatanAdmin'] ?? '',
             tanggalBarangKembali: dataRes['tanggalBarangKembali'] != null
-              ? (dataRes['tanggalBarangKembali'] as Timestamp).toDate()
-              : null,
+                ? (dataRes['tanggalBarangKembali'] as Timestamp).toDate()
+                : null,
+            tanggalDitolakAdmin: dataRes['tanggalDiTolakAdmin'] != null
+                ? (dataRes['tanggalDiTolakAdmin'] as Timestamp).toDate()
+                : null,
           );
 
           allData.add(dataPinjaman);

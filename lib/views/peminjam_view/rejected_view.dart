@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:peminjaman_alat/controllers/peminjam/rejected_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:intl/intl.dart';
+import 'package:peminjaman_alat/utils/empaty_state.dart';
 
 class RejectedView extends GetView<RejectedController> {
   const RejectedView({super.key});
@@ -35,15 +36,25 @@ class RejectedView extends GetView<RejectedController> {
             child: CircularProgressIndicator(color: AppColors.primary),
           );
         }
+        if (controller.pinjamanC.dataPeminjamanDitolak.isEmpty) {
+          return Center(
+            child: Empetystate(
+              title: 'Belum ada riwayat',
+              subTitle: 'Belum ada data yang di tolak petugas/admin',
+            ),
+          );
+        }
         return Padding(
           padding: EdgeInsets.all(10),
           child: ListView.builder(
             itemBuilder: (context, index) {
               final dataRejected =
                   controller.pinjamanC.dataPeminjamanDitolak[index];
+              final tanggalditolak =
+                  dataRejected.tanggalDitolakAdmin ?? DateTime.now();
               final tglDiTolak = DateFormat(
                 'dd MMM yyyy',
-              ).format(dataRejected.tanggalDitolak ?? DateTime.now());
+              ).format(dataRejected.tanggalDitolak ?? tanggalditolak);
               final barangUtama = dataRejected.detailPinjaman[0];
               final listNamaBarang = dataRejected.detailPinjaman
                   .map((e) => e.nama)
@@ -165,7 +176,9 @@ class RejectedView extends GetView<RejectedController> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        'Alasan: ${dataRejected.alasanPenolakan}.',
+                        dataRejected.alasanPenolakan == ''
+                            ? 'Alasan penolakan: ${dataRejected.catatanAdmin}.'
+                            : 'Alasan: ${dataRejected.alasanPenolakan}.',
                         style: TextStyle(
                           color: AppColors.textSecondary,
                           fontFamily: 'Inter',

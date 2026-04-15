@@ -114,6 +114,9 @@ class PinjamanController extends GetxController {
             tanggalBarangKembali: res['tanggalBarangKembali'] != null
                 ? (res['tanggalBarangKembali'] as Timestamp).toDate()
                 : null,
+            tanggalDitolakAdmin: res['tanggalDiTolakAdmin'] != null
+                ? (res['tanggalDiTolakAdmin'] as Timestamp).toDate()
+                : null,
           );
 
           data.add(peminjaman);
@@ -125,7 +128,8 @@ class PinjamanController extends GetxController {
             dataPeminjaman.add(peminjaman);
           } else if (peminjaman.status == 'selesai') {
             dataPeminjamanSelesai.add(peminjaman);
-          } else if (peminjaman.status == 'di_tolak') {
+          } else if (peminjaman.status == 'di_tolak' ||
+              peminjaman.status == 'dibatalkan_admin') {
             dataPeminjamanDitolak.add(peminjaman);
           }
         }

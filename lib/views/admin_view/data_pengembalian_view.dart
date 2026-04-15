@@ -88,7 +88,7 @@ class DataPengembalianView extends GetView<DataPengembalianController> {
                           color: AppColors.textSecondary,
                           size: 20,
                         ),
-                        hintText: 'Cari berdasarkan nama peminjam...',
+                        hintText: 'Cari berdasarkan nama atau id...',
                         hintStyle: TextStyle(
                           color: AppColors.textSecondary,
                           fontFamily: 'Inter',
