@@ -21,7 +21,7 @@ class PengembalianProvider {
     final data = {
       'status': 'selesai',
       'denda': denda,
-      'tanggalKembali': FieldValue.serverTimestamp(),
+      'tanggalBarangKembali': FieldValue.serverTimestamp(),
     };
 
     batch.update(docTransRef, data);

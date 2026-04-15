@@ -21,6 +21,7 @@ class PinjamanProvider {
 
     final data = {
       'status': 'di_kembalikan',
+      'tanggalKembali': FieldValue.serverTimestamp(),
       };
 
       batch.update(docTrans, data);

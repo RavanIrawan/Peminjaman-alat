@@ -72,6 +72,7 @@ class PengembalianController extends GetxController {
         _authC.userWithModel.value?.nama ?? '',
         petugasC.allData[index].namaPeminjam,
       );
+      Get.back();
     } catch (error) {
       Get.snackbar(
         'Error',
@@ -331,7 +332,7 @@ class PengembalianController extends GetxController {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Durasi',
+                              'Durasi Terlambat',
                               style: TextStyle(
                                 color: AppColors.textPrimary,
                                 fontFamily: 'Inter',

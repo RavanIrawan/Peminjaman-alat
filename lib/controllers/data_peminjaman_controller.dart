@@ -23,6 +23,10 @@ class DataPeminjamanController extends GetxController {
     super.onInit();
     await getAllData();
     getDataWithStatusDiPinjam();
+
+    debounce(keyword, (callback) {
+      searchData(keyword.value);
+    }, time: Duration(milliseconds: 500));
   }
 
   void searchData(String value) {
@@ -122,6 +126,10 @@ class DataPeminjamanController extends GetxController {
               : null,
           tenggatWaktu: data['tenggatWaktu'] != null
               ? (data['tenggatWaktu'] as Timestamp).toDate()
+              : null,
+          catatanAdmin: data['catatanAdmin'] ?? '',
+          tanggalBarangKembali: data['tanggalBarangKembali'] != null
+              ? (data['tanggalBarangKembali'] as Timestamp).toDate()
               : null,
         );
         dataAll.add(peminjamanModel);

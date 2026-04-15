@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/views/admin_view/alat_view_admin.dart';
 import 'package:peminjaman_alat/views/admin_view/data_peminjaman_view.dart';
+import 'package:peminjaman_alat/views/admin_view/data_pengembalian_view.dart';
 import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
 import 'package:peminjaman_alat/views/admin_view/users_page.dart';
 
@@ -33,13 +34,13 @@ class MainAdminViewController extends GetxController {
     'peminjaman': {
       'icon': Icons.handshake,
       'text': 'Data Peminjaman',
-      'route': '/peminjaman',
+      'route': DataPeminjamanView.routeName,
     },
 
     'pengembalian': {
       'icon': Icons.move_to_inbox,
       'text': 'Data Pengembalian',
-      'route': DataPeminjamanView.routeName,
+      'route': DataPengembalianView.routeName,
     },
   };
 

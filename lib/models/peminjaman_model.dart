@@ -8,6 +8,7 @@ class PeminjamanModel {
   String idPeminjam;
   String status;
   DateTime tanggalPengajuan;
+  final DateTime? tanggalBarangKembali;
   final DateTime? tanggalKembali;
   final DateTime? tanggalPinjam;
   final DateTime? tenggatWaktu;
@@ -25,6 +26,7 @@ class PeminjamanModel {
     required this.idPeminjam,
     required this.status,
     required this.tanggalPengajuan,
+    this.tanggalBarangKembali,
     this.tanggalKembali,
     this.tanggalPinjam,
     this.tenggatWaktu,

@@ -11,6 +11,7 @@ import 'package:peminjaman_alat/bindings/peminjam/cancel_peminjaman_binding.dart
 import 'package:peminjaman_alat/bindings/peminjam/detail_alat_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/detail_pinjaman_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/rejected_binding.dart';
+import 'package:peminjaman_alat/bindings/pengembalian_binding.dart';
 import 'package:peminjaman_alat/bindings/petugas/dashboard_petugas_bindings.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
 import 'package:peminjaman_alat/bindings/users_binding.dart';
@@ -18,6 +19,7 @@ import 'package:peminjaman_alat/views/admin_view/add_new_alat.dart';
 import 'package:peminjaman_alat/views/admin_view/add_new_user.dart';
 import 'package:peminjaman_alat/views/admin_view/alat_view_admin.dart';
 import 'package:peminjaman_alat/views/admin_view/data_peminjaman_view.dart';
+import 'package:peminjaman_alat/views/admin_view/data_pengembalian_view.dart';
 import 'package:peminjaman_alat/views/admin_view/edit_pinjaman_view.dart';
 import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
 import 'package:peminjaman_alat/views/admin_view/main_admin_view.dart';
@@ -159,6 +161,13 @@ class RoutePage {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
       binding: EditPinjamanBinding(),
+    ),
+    GetPage(
+      name: DataPengembalianView.routeName,
+      page: () => DataPengembalianView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: PengembalianBinding(),
     ),
   ];
 }

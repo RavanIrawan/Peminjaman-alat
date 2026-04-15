@@ -111,6 +111,9 @@ class PinjamanController extends GetxController {
             profilePeminjam: res['profilePeminjam'],
             namaPeminjam: res['namaPeminjam'] ?? '',
             catatanAdmin: res['catatanAdmin'] ?? '',
+            tanggalBarangKembali: res['tanggalBarangKembali'] != null
+                ? (res['tanggalBarangKembali'] as Timestamp).toDate()
+                : null,
           );
 
           data.add(peminjaman);
