@@ -12,6 +12,7 @@ class EditProfileController extends GetxController {
   final emailText = TextEditingController();
   final passwordText = TextEditingController();
   final newEmailText = TextEditingController();
+  final phone = TextEditingController();
   final _getConnect = GetConnect();
   final _imagePicker = ImagePicker();
   final isUploading = false.obs;
@@ -25,6 +26,7 @@ class EditProfileController extends GetxController {
   void onInit() {
     nameText.text = authC.userWithModel.value?.nama ?? 'Guest';
     emailText.text = authC.userWithModel.value?.email ?? 'Geust@gmail.com';
+    phone.text = authC.userWithModel.value?.phone ?? '0';
 
     super.onInit();
   }
@@ -33,6 +35,9 @@ class EditProfileController extends GetxController {
   void onClose() {
     nameText.dispose();
     emailText.dispose();
+    newEmailText.dispose();
+    passwordText.dispose();
+    phone.dispose();
     imageFile.value = null;
 
     super.onClose();
@@ -113,12 +118,17 @@ class EditProfileController extends GetxController {
           pickedImageurl ?? authC.userWithModel.value?.profile;
 
       final id = authC.userWithModel.value?.id;
+
+      authC.userWithModel.value?.phone = phone.text;
+      authC.userWithModel.value?.nama = nameText.text;
+
       await _provider.updateUserInfo(
         id!,
         finalImageUrl,
         nameText.text,
         emailText.text,
         authC.userWithModel.value?.role ?? 'Peminjam',
+        phone.text,
       );
     } catch (error) {
       Get.snackbar(

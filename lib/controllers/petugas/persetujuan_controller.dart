@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'package:peminjaman_alat/controllers/petugas/petugas_controller.dart';
 import 'package:peminjaman_alat/models/peminjaman_model.dart';
 import 'package:peminjaman_alat/providers/petugas/persetujuan_provider.dart';
@@ -10,6 +11,7 @@ class PersetujuanController extends GetxController {
   final isLoading = false.obs;
   final petugasC = Get.find<PetugasController>();
   final _provider = Get.find<PersetujuanProvider>();
+  final _authC = Get.find<AuthController>();
   final textPenolakan = ''.obs;
 
   @override
@@ -29,6 +31,8 @@ class PersetujuanController extends GetxController {
         Timestamp.fromDate(tanggalPinjam),
         Timestamp.fromDate(tenggatWaktu),
         data,
+        _authC.userWithModel.value?.id ?? '',
+        _authC.userWithModel.value?.nama ?? '',
       );
     } catch (error) {
       Get.snackbar(

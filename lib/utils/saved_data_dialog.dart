@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:peminjaman_alat/controllers/peminjam/detail_alat_view_controller.dart';
 import 'package:peminjaman_alat/controllers/peminjam/home_peminjaman_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
 
@@ -56,6 +57,9 @@ class SavedDataDialog {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      if (Get.isRegistered<DetailAlatViewController>()) {
+                        Get.back();
+                      }
                       final tabPage = Get.find<HomePeminjamanController>();
                       Get.back();
 

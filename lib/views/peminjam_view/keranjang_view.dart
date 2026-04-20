@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peminjaman_alat/controllers/auth_controller.dart';
 import 'package:peminjaman_alat/controllers/peminjam/home_peminjaman_product_controller.dart';
 import 'package:peminjaman_alat/controllers/peminjam/keranjang_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
@@ -14,6 +15,7 @@ class KeranjangView extends StatefulWidget {
 
 class _KeranjangViewState extends State<KeranjangView>
     with AutomaticKeepAliveClientMixin {
+  final _auth = Get.find<AuthController>();
   final _keranjangC = Get.find<KeranjangController>();
   final _homeProdC = Get.find<HomePeminjamanProductController>();
 
@@ -508,7 +510,15 @@ class _KeranjangViewState extends State<KeranjangView>
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    _keranjangC.userTransactionInCart();
+                    final user = _auth.userWithModel.value;
+                    if (user?.phone == null ||
+                        user!.phone!.isEmpty ||
+                        user.phone == '0') {
+                      _keranjangC.tampilkanDialogLengkapiProfil();
+                      return;
+                    } else {
+                      _keranjangC.userTransactionInCart();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),

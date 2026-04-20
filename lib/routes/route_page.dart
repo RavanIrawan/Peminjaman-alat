@@ -2,19 +2,32 @@ import 'package:get/get.dart';
 import 'package:peminjaman_alat/bindings/add_alat_binding.dart';
 import 'package:peminjaman_alat/bindings/add_user_binding.dart';
 import 'package:peminjaman_alat/bindings/alat_binding.dart';
+import 'package:peminjaman_alat/bindings/arsip_dibatalkan_binding.dart';
 import 'package:peminjaman_alat/bindings/dashboard_home_admin_binding.dart';
+import 'package:peminjaman_alat/bindings/data_peminjaman_binding.dart';
+import 'package:peminjaman_alat/bindings/edit_pengembalian_admin_binding.dart';
+import 'package:peminjaman_alat/bindings/edit_pinjaman_binding.dart';
 import 'package:peminjaman_alat/bindings/edit_profile_binding.dart';
 import 'package:peminjaman_alat/bindings/kategori_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/cancel_peminjaman_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/detail_alat_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/detail_pinjaman_binding.dart';
 import 'package:peminjaman_alat/bindings/peminjam/rejected_binding.dart';
+import 'package:peminjaman_alat/bindings/pengembalian_admin_binding.dart';
+import 'package:peminjaman_alat/bindings/pengembalian_binding.dart';
+import 'package:peminjaman_alat/bindings/persetujuan_admin_binding.dart';
 import 'package:peminjaman_alat/bindings/petugas/dashboard_petugas_bindings.dart';
 import 'package:peminjaman_alat/bindings/profile_binding.dart';
+import 'package:peminjaman_alat/bindings/report_pdf_admin_binding.dart';
 import 'package:peminjaman_alat/bindings/users_binding.dart';
 import 'package:peminjaman_alat/views/admin_view/add_new_alat.dart';
 import 'package:peminjaman_alat/views/admin_view/add_new_user.dart';
 import 'package:peminjaman_alat/views/admin_view/alat_view_admin.dart';
+import 'package:peminjaman_alat/views/admin_view/arsip_dibatalkan_view.dart';
+import 'package:peminjaman_alat/views/admin_view/data_peminjaman_view.dart';
+import 'package:peminjaman_alat/views/admin_view/data_pengembalian_view.dart';
+import 'package:peminjaman_alat/views/admin_view/edit_data_pengembalian.dart';
+import 'package:peminjaman_alat/views/admin_view/edit_pinjaman_view.dart';
 import 'package:peminjaman_alat/views/admin_view/kategory_home.dart';
 import 'package:peminjaman_alat/views/admin_view/main_admin_view.dart';
 import 'package:peminjaman_alat/views/admin_view/users_page.dart';
@@ -29,6 +42,9 @@ import 'package:peminjaman_alat/views/peminjam_view/home_peminjam.dart';
 import 'package:peminjaman_alat/views/peminjam_view/rejected_view.dart';
 import 'package:peminjaman_alat/views/petugas_view/home_petugas.dart';
 import 'package:peminjaman_alat/bindings/peminjam/dashboard_peminjaman.dart';
+import 'package:peminjaman_alat/views/petugas_view/pengembalian_view.dart';
+import 'package:peminjaman_alat/views/petugas_view/persetujuan_view.dart';
+import 'package:peminjaman_alat/views/petugas_view/report_pdf_view.dart';
 
 class RoutePage {
   static final route = [
@@ -43,7 +59,10 @@ class RoutePage {
       page: () => MainAdminView(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
-      binding: DashboardHomeAdminBinding(),
+      bindings: [
+        DashboardHomeAdminBinding(),
+        DashboardPeminjaman(),
+      ],
     ),
     GetPage(
       name: '/Petugas-view',
@@ -141,6 +160,62 @@ class RoutePage {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 300),
       binding: RejectedBinding(),
+    ),
+    GetPage(
+      name: DataPeminjamanView.routeName,
+      page: () => DataPeminjamanView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: DataPeminjamanBinding(),
+    ),
+    GetPage(
+      name: EditPinjamanView.routeName,
+      page: () => EditPinjamanView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: EditPinjamanBinding(),
+    ),
+    GetPage(
+      name: DataPengembalianView.routeName,
+      page: () => DataPengembalianView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: PengembalianBinding(),
+    ),
+    GetPage(
+      name: EditDataPengembalian.routeName,
+      page: () => EditDataPengembalian(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: EditPengembalianAdminBinding(),
+    ),
+    GetPage(
+      name: ArsipDibatalkanView.routeName,
+      page: () => ArsipDibatalkanView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: ArsipDibatalkanBinding(),
+    ),
+    GetPage(
+      name: PersetujuanView.routeName,
+      page: () => PersetujuanView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: PersetujuanAdminBinding(),
+    ),
+    GetPage(
+      name: PengembalianView.routeName,
+      page: () => PengembalianView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: PengembalianAdminBinding(),
+    ),
+    GetPage(
+      name: ReportPdfView.routeName,
+      page: () => ReportPdfView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
+      binding: ReportPdfAdminBinding(),
     ),
   ];
 }

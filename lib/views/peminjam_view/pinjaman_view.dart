@@ -10,6 +10,7 @@ import 'package:peminjaman_alat/views/peminjam_view/rejected_view.dart';
 
 class PinjamanView extends GetView<PinjamanViewController> {
   const PinjamanView({super.key});
+  static const routeName = '/pinjamanku';
 
   @override
   Widget build(BuildContext context) {

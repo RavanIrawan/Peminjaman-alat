@@ -62,7 +62,7 @@ class UsersController extends GetxController {
           email: dataUser['email'] ?? 'Guest@gmail.com',
           profile: dataUser['profile'] ?? UrlDefaultProfile.url,
           role: dataUser['role'] ?? 'Peminjam',
-          phone: dataUser['phone'] ?? 0,
+          phone: dataUser['phone'] ?? '',
         );
         users.add(extractedDataUser);
         displayUser.add(extractedDataUser);

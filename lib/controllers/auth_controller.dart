@@ -17,6 +17,7 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final isLoading = false.obs;
+  bool isRegistering = false;
   Rx<User?> user = Rx<User?>(null);
   Rx<UserModel?> userWithModel = Rx<UserModel?>(null);
   late TextEditingController emailC;
@@ -30,6 +31,7 @@ class AuthController extends GetxController {
   late TextEditingController nameReg;
   late TextEditingController emailReg;
   late TextEditingController passReg;
+  late TextEditingController phoneReg;
 
   late TextEditingController emailReset;
 
@@ -43,6 +45,7 @@ class AuthController extends GetxController {
     nameReg = TextEditingController();
     emailReg = TextEditingController();
     passReg = TextEditingController();
+    phoneReg = TextEditingController();
 
     emailReset = TextEditingController();
 
@@ -52,7 +55,20 @@ class AuthController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    emailC.dispose();
+    passC.dispose();
+    nameReg.dispose();
+    emailReg.dispose();
+    passReg.dispose();
+    phoneReg.dispose();
+    emailReset.dispose();
+    super.onClose();
+  }
+
   void setCurrentView(User? user) async {
+    if (isRegistering) return;
     try {
       if (user != null) {
         isLoading.value = true;
@@ -174,7 +190,13 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> signin(String nama, String email, String password) async {
+  Future<void> signin(
+    String nama,
+    String email,
+    String password,
+    String phone,
+  ) async {
+    isRegistering = true;
     isLoading.value = true;
     try {
       final UserCredential currentUser = await _auth
@@ -185,9 +207,17 @@ class AuthController extends GetxController {
       if (user != null) {
         user.updateDisplayName(nama);
 
-        final data = UserModel(nama: nama, email: email, role: 'Peminjam');
+        final data = UserModel(
+          nama: nama,
+          email: email,
+          role: 'Peminjam',
+          phone: phone,
+        );
         await _firestore.collection('users').doc(user.uid).set(data.toMap());
-        Get.toNamed('/Peminjam-view');
+
+        isRegistering = false;
+        setCurrentView(user);
+
         Get.snackbar(
           'Success',
           'Data kamu sudah tersimpan dengan aman. Selamat menikmati kemudahan pinjam-meminjam barang.',
@@ -198,9 +228,11 @@ class AuthController extends GetxController {
         );
       }
     } on FirebaseAuthException catch (e) {
+      isRegistering = false;
       final errorMessage = messageError(e.code);
       Get.snackbar('Gagal', errorMessage);
     } catch (error) {
+      isRegistering = false;
       Get.snackbar(
         'Terjadi kesalahan',
         'Silahkan coba lagi nanti',
@@ -212,6 +244,7 @@ class AuthController extends GetxController {
         colorText: AppColors.background,
       );
     } finally {
+      isRegistering = false;
       isLoading.value = false;
     }
   }
@@ -232,6 +265,7 @@ class AuthController extends GetxController {
         idToken: googleAuth.idToken,
       );
 
+      isRegistering = true;
       isLoading.value = true;
       final UserCredential currentUser = await _auth.signInWithCredential(
         credential,
@@ -251,16 +285,19 @@ class AuthController extends GetxController {
             id: user.uid,
             nama: user.displayName ?? 'unknow',
             email: user.email ?? 'Test@gmail.com',
+            phone: user.phoneNumber ?? '0',
             role: 'Peminjam',
             profile: user.photoURL ?? UrlDefaultProfile.url,
           );
 
           await userDoc.set(newUser.toMap());
 
-          Get.toNamed('/Peminjam-view');
+          isRegistering = false;
+          setCurrentView(user);
         } else {
           await userDoc.update({'createdAt': FieldValue.serverTimestamp()});
 
+          isRegistering = false;
           setCurrentView(user);
 
           String username = googleUser.displayName ?? 'User';
@@ -302,7 +339,7 @@ class AuthController extends GetxController {
 
       Get.delete<PinjamanController>();
     }
-    if(Get.isRegistered<PetugasController>()){
+    if (Get.isRegistered<PetugasController>()) {
       final petugasC = Get.find<PetugasController>();
       petugasC.clearData();
 

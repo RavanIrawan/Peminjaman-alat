@@ -11,6 +11,7 @@ class AddUserController extends GetxController {
   TextEditingController emailText = TextEditingController();
   TextEditingController passText = TextEditingController();
   TextEditingController namaText = TextEditingController();
+  TextEditingController phoneText = TextEditingController();
   final _provider = Get.find<AddUserProvider>();
   final _auth = Get.find<AuthController>();
   final isLoading = false.obs;
@@ -34,6 +35,7 @@ class AddUserController extends GetxController {
       );
 
       namaText.text = usersEdit.nama!;
+      phoneText.text = usersEdit.phone ?? '';
       emailText.text = usersEdit.email!;
       selectedRole.value = usersEdit.role!;
       profileUserEdit = usersEdit.profile!;
@@ -53,7 +55,7 @@ class AddUserController extends GetxController {
   Future<void> updateUser() async {
     isLoading.value = true;
     try {
-      await _provider.editUser(idUserEdit!, namaText.text, selectedRole.value, emailText.text, 0, profileUserEdit!);
+      await _provider.editUser(idUserEdit!, namaText.text, selectedRole.value, emailText.text, '', profileUserEdit!);
       Get.back();
       Get.snackbar(
         'Success',
@@ -79,7 +81,7 @@ class AddUserController extends GetxController {
     }
   }
 
-  Future<void> addUser(String email, String password, String nama) async {
+  Future<void> addUser(String email, String password, String nama, String phone) async {
     if (email.isEmpty || password.isEmpty || nama.isEmpty) {
       Get.snackbar(
         'Peringatan',
@@ -91,7 +93,7 @@ class AddUserController extends GetxController {
     }
     isLoading.value = true;
     try {
-      await _provider.addNewUser(email, password, nama, selectedRole.value);
+      await _provider.addNewUser(email, password, nama, selectedRole.value, phone);
 
       emailText.clear();
       passText.clear();

@@ -8,6 +8,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class PersetujuanView extends StatefulWidget {
   const PersetujuanView({super.key});
+  static const routeName = '/persetujuan';
 
   @override
   State<PersetujuanView> createState() => _PersetujuanViewState();
@@ -140,6 +141,17 @@ class _PersetujuanViewState extends State<PersetujuanView>
                                   width: 40,
                                   height: 40,
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      width: 40,
+                                      height: 40,
+                                      color: Colors.grey.shade300,
+                                      child: Icon(
+                                        Icons.person,
+                                        color: Colors.grey.shade600,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                               SizedBox(width: 8),
@@ -149,21 +161,38 @@ class _PersetujuanViewState extends State<PersetujuanView>
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      dataPersetujuan.namaPeminjam,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: AppColors.textPrimary,
-                                        fontFamily: 'Inter',
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            dataPersetujuan.namaPeminjam,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: AppColors.textPrimary,
+                                              fontFamily: 'Inter',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            dataPersetujuan.noPeminjam,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: AppColors.textPrimary,
+                                              fontFamily: 'Inter',
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Text(
                                       currentTime,
                                       maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: AppColors.textSecondary,
                                         fontFamily: 'Inter',

@@ -185,6 +185,8 @@ class KategoriController extends GetxController {
   }
 
   Future<void> addNewKategori() async {
+    if(kategoriNameText.text.trim().isEmpty) return;
+    
     isLoading.value = true;
     try {
       final randomId = RandomText().generateRandomString(28);
