@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/controllers/data_pengembalian_controller.dart';
 import 'package:peminjaman_alat/utils/app_colors.dart';
+import 'package:peminjaman_alat/views/admin_view/arsip_dibatalkan_view.dart';
 import 'package:peminjaman_alat/views/admin_view/data_pengembalian_di_kembalikan_view.dart';
 import 'package:peminjaman_alat/views/admin_view/data_pengembalian_selesai_view.dart';
 
@@ -39,7 +40,8 @@ class DataPengembalianView extends GetView<DataPengembalianController> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextField(
-                      onChanged: (value) => controller.searchDataWithkeyword(value),
+                      onChanged: (value) =>
+                          controller.searchDataWithkeyword(value),
                       autocorrect: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -139,6 +141,14 @@ class DataPengembalianView extends GetView<DataPengembalianController> {
               ],
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.toNamed(ArsipDibatalkanView.routeName);
+              },
+              icon: Icon(Icons.delete_sweep, color: AppColors.primary),
+            ),
+          ],
         ),
         body: TabBarView(
           children: [

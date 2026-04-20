@@ -161,6 +161,71 @@ class AddNewUser extends GetView<AddUserController> {
                         hintStyle: TextStyle(color: AppColors.textSecondary),
                       ),
                     ),
+                    SizedBox(height: 20),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Phone',
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                          color: controller.isEditMode.value
+                              ? AppColors.textSecondary
+                              : AppColors.textPrimary,
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 8),
+
+                    TextFormField(
+                      controller: controller.phoneText,
+                      enabled: controller.isEditMode.value ? false : null,
+                      validator: (value) {
+                        if (!GetUtils.isNumericOnly(value!) &&
+                            value.length > 15) {
+                          return 'input nomor tidak valid';
+                        } else if (value.isEmpty) {
+                          return 'Field tidak boleh kosong';
+                        } else {
+                          return null;
+                        }
+                      },
+                      keyboardType: TextInputType.phone,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 0.1,
+                            color: AppColors.error,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 0.1,
+                            color: AppColors.error,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 0.1,
+                            color: AppColors.textSecondary,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 0.1,
+                            color: AppColors.textSecondary,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        hintText: '08937264859',
+                        hintStyle: TextStyle(color: AppColors.textSecondary),
+                      ),
+                    ),
 
                     SizedBox(height: 20),
 
@@ -327,6 +392,7 @@ class AddNewUser extends GetView<AddUserController> {
                         controller.emailText.text,
                         controller.passText.text,
                         controller.namaText.text,
+                        controller.phoneText.text,
                       );
                     }
                   }

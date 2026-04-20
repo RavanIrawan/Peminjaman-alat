@@ -435,14 +435,22 @@ class DetailAlatView extends GetView<DetailAlatViewController> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  if (controller.qty.value != 0) {
-                    keranjangC.userTransactionInDetail(
-                      controller.productId,
-                      controller.detailProd.value?.namaAlat ?? '',
-                      controller.qty.value,
-                      controller.selectedDuration.value!,
-                      controller.detailProd.value?.gambar ?? '',
-                    );
+                  final user = controller.authC.userWithModel.value;
+
+                  if (user?.phone == null ||
+                      user!.phone!.isEmpty ||
+                      user.phone == '0') {
+                    controller.tampilkanDialogLengkapiProfil();
+                  } else {
+                    if (controller.qty.value != 0) {
+                      keranjangC.userTransactionInDetail(
+                        controller.productId,
+                        controller.detailProd.value?.namaAlat ?? '',
+                        controller.qty.value,
+                        controller.selectedDuration.value!,
+                        controller.detailProd.value?.gambar ?? '',
+                      );
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(

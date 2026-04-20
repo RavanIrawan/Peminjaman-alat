@@ -161,6 +161,69 @@ class EditProfile extends GetView<EditProfileController> {
                                   ),
                                 ),
 
+                                SizedBox(height: 20,),
+
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'No Telp',
+                                    style: TextStyle(
+                                      color: AppColors.textPrimary,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                ),
+
+                                SizedBox(height: 8.0),
+
+                                TextFormField(
+                                  controller: controller.phone,
+                                  validator: (value) {
+                                    if(value!.isEmpty){
+                                      return 'Field tidak boleh kosong';
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 0.1,
+                                        color: AppColors.error,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 0.1,
+                                        color: AppColors.error,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 0.1,
+                                        color: AppColors.textSecondary,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        width: 0.1,
+                                        color: AppColors.textSecondary,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.person,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+
                                 SizedBox(height: 20),
 
                                 Align(

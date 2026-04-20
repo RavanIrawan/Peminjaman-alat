@@ -7,6 +7,7 @@ class PeminjamanModel {
   int durasi;
   String idPeminjam;
   String status;
+  String noPeminjam;
   DateTime tanggalPengajuan;
   DateTime? tanggalBarangKembali;
   DateTime? tanggalKembali;
@@ -37,5 +38,6 @@ class PeminjamanModel {
     required this.namaPeminjam,
     this.catatanAdmin,
     this.tanggalDitolakAdmin,
+    required this.noPeminjam,
   });
 }

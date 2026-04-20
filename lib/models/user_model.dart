@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   String? id;
-  final String? nama;
-  final String? email;
-  final String? role;
+  String? nama;
+  String? email;
+  String? role;
   String? profile;
-  final int? phone;
-  final dynamic createdAt;
+  String? phone;
+  dynamic createdAt;
 
   UserModel({
     this.id,
@@ -25,7 +25,7 @@ class UserModel {
       'email': email,
       'role': role,
       'profile': profile,
-      'phone': phone ?? 0,
+      'phone': phone ?? '',
       'createdAt': FieldValue.serverTimestamp(),
     };
   }

@@ -5,6 +5,7 @@ import 'package:peminjaman_alat/utils/app_colors.dart';
 import 'package:get/get.dart';
 import 'package:peminjaman_alat/utils/convert_to_rupiah.dart';
 import 'package:peminjaman_alat/utils/empaty_state.dart';
+import 'package:peminjaman_alat/views/admin_view/edit_data_pengembalian.dart';
 
 class DataPengembalianSelesaiView extends StatefulWidget {
   const DataPengembalianSelesaiView({super.key});
@@ -171,8 +172,21 @@ class _DataPengembalianSelesaiViewState
                                       duration: Duration(milliseconds: 500),
                                     ),
                                     onSelected: (value) {
-                                      if(value == 'detail'){
-                                        pengembalianC.showBottomSheetsForDetail(context, data);
+                                      if (value == 'detail') {
+                                        pengembalianC.showBottomSheetsForDetail(
+                                          context,
+                                          data,
+                                        );
+                                      } else if (value == 'edit') {
+                                        Get.toNamed(
+                                          EditDataPengembalian.routeName,
+                                          arguments: data,
+                                        );
+                                      } else if (value == 'delete') {
+                                        pengembalianC.showBottomSheetsForReject(
+                                          data.id ?? '',
+                                          data,
+                                        );
                                       }
                                     },
                                     itemBuilder: (context) {
@@ -181,14 +195,21 @@ class _DataPengembalianSelesaiViewState
                                           value: 'detail',
                                           child: Row(
                                             children: [
-                                              Icon(Icons.details, color: AppColors.primary,size: 18,),
-                                              SizedBox(width: 8),
-                                              Text('Detail', style: TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
+                                              Icon(
+                                                Icons.details,
                                                 color: AppColors.primary,
-                                              ),),
+                                                size: 18,
+                                              ),
+                                              SizedBox(width: 8),
+                                              Text(
+                                                'Detail',
+                                                style: TextStyle(
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColors.primary,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -196,14 +217,21 @@ class _DataPengembalianSelesaiViewState
                                           value: 'edit',
                                           child: Row(
                                             children: [
-                                              Icon(Icons.edit, size: 18, color: AppColors.warning,),
-                                              SizedBox(width: 8),
-                                              Text('Edit', style: TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
+                                              Icon(
+                                                Icons.edit,
+                                                size: 18,
                                                 color: AppColors.warning,
-                                              ),),
+                                              ),
+                                              SizedBox(width: 8),
+                                              Text(
+                                                'Edit',
+                                                style: TextStyle(
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColors.warning,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -211,14 +239,21 @@ class _DataPengembalianSelesaiViewState
                                           value: 'delete',
                                           child: Row(
                                             children: [
-                                              Icon(Icons.delete, size: 18, color: AppColors.error,),
-                                              SizedBox(width: 8),
-                                              Text('Delete', style: TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
+                                              Icon(
+                                                Icons.delete,
+                                                size: 18,
                                                 color: AppColors.error,
-                                              ),),
+                                              ),
+                                              SizedBox(width: 8),
+                                              Text(
+                                                'Delete',
+                                                style: TextStyle(
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColors.error,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -292,8 +327,7 @@ class _DataPengembalianSelesaiViewState
                                           checkDelay
                                               ? 'terlambat - denda $toRupiah'
                                                     .toUpperCase()
-                                              : 'tepat waktu'
-                                                    .toUpperCase(),
+                                              : 'tepat waktu'.toUpperCase(),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(

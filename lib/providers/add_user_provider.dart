@@ -13,6 +13,7 @@ class AddUserProvider {
     String password,
     String nama,
     String role,
+    String phone
   ) async {
     FirebaseApp mainApp = Firebase.app();
     FirebaseOptions appOption = mainApp.options;
@@ -32,7 +33,7 @@ class AddUserProvider {
       final newUserUid = newUser.user!.uid;
       await newUser.user!.updateDisplayName(nama);
 
-      final data = UserModel(nama: nama, email: email, role: role);
+      final data = UserModel(nama: nama, email: email, role: role, phone: phone);
 
       await _reference.doc(newUserUid).set(data.toMap());
     } finally {
@@ -45,7 +46,7 @@ class AddUserProvider {
     String nama,
     String role,
     String email,
-    int phone,
+    String phone,
     String profile
   ) async {
     final data = UserModel(

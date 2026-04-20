@@ -16,6 +16,7 @@ class Register extends StatelessWidget {
         authC.nameReg.clear();
         authC.emailReg.clear();
         authC.passReg.clear();
+        authC.phoneReg.clear();
       },
       child: Scaffold(
         backgroundColor: AppColors.background,
@@ -210,6 +211,75 @@ class Register extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
+                                'Phone',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+
+                            SizedBox(height: 8),
+
+                            TextFormField(
+                              controller: authC.phoneReg,
+                              validator: (value) {
+                                if (!GetUtils.isNumericOnly(value!) &&
+                                    value.length > 15) {
+                                  return 'input nomor tidak valid';
+                                } else if (value.isEmpty) {
+                                  return 'Field tidak boleh kosong';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              keyboardType: TextInputType.phone,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.1,
+                                    color: AppColors.error,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.1,
+                                    color: AppColors.error,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.1,
+                                    color: AppColors.textSecondary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.1,
+                                    color: AppColors.textSecondary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.phone,
+                                  color: Colors.grey,
+                                ),
+                                hintText: '089349182377',
+                                hintStyle: TextStyle(
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ),
+
+                            SizedBox(height: 20),
+
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
                                 'Password',
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
@@ -310,7 +380,10 @@ class Register extends StatelessWidget {
                                   return null;
                                 }
                               },
-                              obscureText: authC.isObsecureTextRegConfirmPass.value ? false : true,
+                              obscureText:
+                                  authC.isObsecureTextRegConfirmPass.value
+                                  ? false
+                                  : true,
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
                                 errorBorder: OutlineInputBorder(
@@ -373,11 +446,17 @@ class Register extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
-                                    authC.signin(authC.nameReg.text, authC.emailReg.text, authC.passReg.text);
+                                    authC.signin(
+                                      authC.nameReg.text,
+                                      authC.emailReg.text,
+                                      authC.passReg.text,
+                                      authC.phoneReg.text,
+                                    );
 
                                     authC.nameReg.clear();
                                     authC.emailReg.clear();
                                     authC.passReg.clear();
+                                    authC.phoneReg.clear();
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(

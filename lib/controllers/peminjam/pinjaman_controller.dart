@@ -46,8 +46,12 @@ class PinjamanController extends GetxController {
 
   bool checkTenggatWaktu(String id) {
     final index = data.indexWhere((element) => element.id == id);
-    DateTime now = DateTime(currentDay.year, currentDay.month, currentDay.day);
     if (index != -1) {
+      final now = DateTime(
+        data[index].tanggalBarangKembali?.year ?? DateTime.now().year,
+        data[index].tanggalBarangKembali?.month ?? DateTime.now().month,
+        data[index].tanggalBarangKembali?.day ?? DateTime.now().day,
+      );
       final prodId = data[index];
       if (now.isAfter(prodId.tenggatWaktu ?? DateTime.now())) {
         return true;
@@ -117,6 +121,7 @@ class PinjamanController extends GetxController {
             tanggalDitolakAdmin: res['tanggalDiTolakAdmin'] != null
                 ? (res['tanggalDiTolakAdmin'] as Timestamp).toDate()
                 : null,
+            noPeminjam: res['noPeminjam'] ?? '0',
           );
 
           data.add(peminjaman);

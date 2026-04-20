@@ -54,6 +54,10 @@ class EditDataPengembalian extends GetView<EditPengembalianAdminController> {
                       controller: controller.tanggalBarangKembali,
                       onTap: () => controller.selecDate(context),
                       readOnly: true,
+                      enabled:
+                          controller.dataPengembalian.value?.status == 'selesai'
+                          ? false
+                          : true,
                       decoration: InputDecoration(
                         suffixIcon: Icon(
                           Icons.calendar_today,
@@ -123,6 +127,10 @@ class EditDataPengembalian extends GetView<EditPengembalianAdminController> {
                     SizedBox(height: 8),
                     TextField(
                       controller: controller.dendaC,
+                      enabled:
+                          controller.dataPengembalian.value?.status == 'selesai'
+                          ? false
+                          : true,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(

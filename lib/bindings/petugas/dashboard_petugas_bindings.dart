@@ -4,9 +4,11 @@ import 'package:peminjaman_alat/controllers/petugas/dashboard_petugas_controller
 import 'package:peminjaman_alat/controllers/petugas/pengembalian_controller.dart';
 import 'package:peminjaman_alat/controllers/petugas/persetujuan_controller.dart';
 import 'package:peminjaman_alat/controllers/petugas/petugas_controller.dart';
+import 'package:peminjaman_alat/controllers/petugas/report_pdf_controller.dart';
 import 'package:peminjaman_alat/providers/petugas/pengembalian_provider.dart';
 import 'package:peminjaman_alat/providers/petugas/persetujuan_provider.dart';
 import 'package:peminjaman_alat/providers/petugas/petugas_provider.dart';
+import 'package:peminjaman_alat/providers/petugas/report_pdf_provider.dart';
 
 class DashboardPetugasBindings extends Bindings {
   @override
@@ -14,7 +16,9 @@ class DashboardPetugasBindings extends Bindings {
     Get.lazyPut(() => PetugasProvider());
     Get.lazyPut(() => PersetujuanProvider());
     Get.lazyPut(() => PengembalianProvider());
+    Get.lazyPut(() => ReportPdfProvider(),);
 
+    Get.lazyPut(() => ReportPdfController(),);
     Get.lazyPut(() => PengembalianController());
     Get.lazyPut(() => PersetujuanController());
     Get.lazyPut(() => PetugasController());

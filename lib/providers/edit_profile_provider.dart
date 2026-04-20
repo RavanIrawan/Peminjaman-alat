@@ -11,9 +11,17 @@ class EditProfileProvider {
     String? path,
     String nama,
     String? email,
-    String role
+    String role,
+    String phone,
   ) async {
-    final data = UserModel(nama: nama, email: email!, profile: path, role: role);
+
+    final data = UserModel(
+      nama: nama,
+      email: email!,
+      profile: path,
+      role: role,
+      phone: phone,
+    );
 
     await _reference.doc(id).update(data.toMap());
   }

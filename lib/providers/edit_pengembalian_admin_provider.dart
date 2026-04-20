@@ -43,7 +43,6 @@ class EditPengembalianAdminProvider {
     try {
       await batch.commit();
     } catch (error) {
-      print('$error');
       throw Exception('Gagal mengubah data peminjaman');
     }
   }

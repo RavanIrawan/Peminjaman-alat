@@ -15,6 +15,7 @@ class KeranjangProvider {
     String profilePeminjam,
     String namaPeminjam,
     String catatanAdmin,
+    String phone
   ) async {
     final batch = _reference.batch();
 
@@ -25,6 +26,7 @@ class KeranjangProvider {
       'durasiHari': durasi,
       'status': status,
       'denda': denda ?? 0,
+      'noPeminjam': phone,
       'detailPinjaman': items,
       'alasanPenolakan': alasanPenolakan ?? '',
       'tanggalPengajuan': FieldValue.serverTimestamp(),

@@ -29,9 +29,15 @@ class EditPengembalianAdminController extends GetxController {
     dendaC = TextEditingController();
     catatanAdmin = TextEditingController();
 
-    tanggalBarangKembali?.text = DateFormat(
-      'MM/dd/yyyy',
-    ).format(DateTime.now());
+    if (dataPengembalian.value?.tanggalBarangKembali != null) {
+      tanggalBarangKembali?.text = DateFormat(
+        'MM/dd/yyyy',
+      ).format(dataPengembalian.value?.tanggalBarangKembali ?? DateTime.now());
+    } else {
+      tanggalBarangKembali?.text = DateFormat(
+        'MM/dd/yyyy',
+      ).format(DateTime.now());
+    }
   }
 
   @override
@@ -128,7 +134,7 @@ class EditPengembalianAdminController extends GetxController {
 
     try {
       dynamic tanggalPayload;
-      
+
       if (tanggalBarangKembaliBaru != null) {
         tanggalPayload = Timestamp.fromDate(tanggalBarangKembaliBaru);
       } else {

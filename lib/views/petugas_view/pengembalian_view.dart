@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 class PengembalianView extends StatefulWidget {
   const PengembalianView({super.key});
+  static const routeName = '/pengembalianAdmin';
 
   @override
   State<PengembalianView> createState() => _PengembalianViewState();
@@ -210,6 +211,17 @@ class _PengembalianViewState extends State<PengembalianView>
                                         fontSize: 14,
                                       ),
                                     ),
+                                    Text(
+                                      data.noPeminjam,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: AppColors.textPrimary,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -361,14 +373,6 @@ class _PengembalianViewState extends State<PengembalianView>
                                         fine,
                                       );
                                 }
-                                // if (data.status == 'di_kembalikan') {
-                                //   pengembalianC
-                                //       .returnProductWithStatusCompleted(
-                                //         data.id!,
-                                //         data.tanggalKembali!,
-                                //         data.tenggatWaktu!,
-                                //       );
-                                // }
                               },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(

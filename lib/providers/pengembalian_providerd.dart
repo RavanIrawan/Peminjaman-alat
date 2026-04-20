@@ -7,9 +7,7 @@ class DataPengembalianProvider {
   );
 
   Future<void> rejectPengembalian(String id) async {
-    await _reference.doc(id).update({
-      'status': 'diPinjam',
-    });
+    await _reference.doc(id).update({'status': 'diPinjam'});
   }
 
   Future<void> softDelete(
@@ -18,7 +16,7 @@ class DataPengembalianProvider {
     String namaAdmin,
     String namaPeminjam,
     PeminjamanModel dataPeminjaman,
-    String catatan
+    String catatan,
   ) async {
     final batch = FirebaseFirestore.instance.batch();
 
@@ -31,11 +29,14 @@ class DataPengembalianProvider {
 
     batch.update(doctransRef, dataTrans);
 
-    for(var dataLama in dataPeminjaman.detailPinjaman){
-      final docAlat = FirebaseFirestore.instance.collection('alat').doc(dataLama.productId);
-      batch.update(docAlat, {
-        'stok': FieldValue.increment(dataLama.qty),
-      });
+    if (dataPeminjaman.status == 'diPinjam' ||
+        dataPeminjaman.status == 'di_kembalikan') {
+      for (var dataLama in dataPeminjaman.detailPinjaman) {
+        final docAlat = FirebaseFirestore.instance
+            .collection('alat')
+            .doc(dataLama.productId);
+        batch.update(docAlat, {'stok': FieldValue.increment(dataLama.qty)});
+      }
     }
 
     final docLog = FirebaseFirestore.instance.collection('logs').doc();
@@ -44,20 +45,24 @@ class DataPengembalianProvider {
       'idTransaksi': id,
       'namaPetugas': namaAdmin,
       'type': 'rejectByAdmin',
-      'aksi': 'Admin $namaAdmin membatalkan peminjaman milik $namaPeminjam dengan id: $id',
+      'aksi':
+          'Admin $namaAdmin membatalkan peminjaman milik $namaPeminjam dengan id: $id',
       'createdAt': FieldValue.serverTimestamp(),
     };
     batch.set(docLog, dataLog);
-    try{
+    try {
       await batch.commit();
-    } catch(error){
+    } catch (error) {
       throw Exception('Gagal membatalkan peminjaman user $namaPeminjam');
     }
   }
 
   Future<QuerySnapshot<Object?>> getAllData() async {
     return await _reference
-        .where('status', whereIn: ['di_kembalikan', 'selesai', 'dibatalkan_admin'])
+        .where(
+          'status',
+          whereIn: ['di_kembalikan', 'selesai', 'dibatalkan_admin'],
+        )
         .get();
   }
 

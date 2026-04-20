@@ -48,14 +48,6 @@ class DataPengembalianController extends GetxController {
     }).toList();
   }
 
-  List<PeminjamanModel> get dataWithStatusDibatalkanAdmin {
-    return dataPengembalianAll.where((value) {
-      final isStatusMatch = value.status == 'dibatalkan_admin';
-
-      return isStatusMatch;
-    }).toList();
-  }
-
   @override
   void onInit() {
     super.onInit();
@@ -120,10 +112,11 @@ class DataPengembalianController extends GetxController {
                 ? (dataPengembalian['tanggalBarangKembali'] as Timestamp)
                       .toDate()
                 : null,
-            tanggalDitolakAdmin: dataPengembalian['tanggalDitolakAdmin'] != null
-                ? (dataPengembalian['tanggalDitolakAdmin'] as Timestamp)
+            tanggalDitolakAdmin: dataPengembalian['tanggalDiTolakAdmin'] != null
+                ? (dataPengembalian['tanggalDiTolakAdmin'] as Timestamp)
                       .toDate()
                 : null,
+                noPeminjam: dataPengembalian['noPeminjam']
           );
 
           dataPengembalianAll.add(pengembalianData);

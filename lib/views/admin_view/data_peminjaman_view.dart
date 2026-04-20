@@ -214,14 +214,38 @@ class DataPeminjamanView extends GetView<DataPeminjamanController> {
                             ],
                           ),
                           SizedBox(height: 10),
-                          Text(
-                            data.namaPeminjam,
-                            style: TextStyle(
-                              color: AppColors.textPrimary,
-                              fontFamily: 'Inter',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  data.namaPeminjam,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: AppColors.textPrimary,
+                                    fontFamily: 'Inter',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.phone, color: AppColors.textSecondary, size: 15,),
+                                  SizedBox(width: 4,),
+                                  Text(
+                                    data.noPeminjam,
+                                    style: TextStyle(
+                                      color: AppColors.textSecondary,
+                                      fontFamily: 'Inter',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                           SizedBox(height: 8),
                           Container(
