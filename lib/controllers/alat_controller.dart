@@ -191,9 +191,9 @@ class AlatController extends GetxController {
         }
       } else {
         Get.snackbar(
-          'Error',
+          'Info',
           'Data pada Document/Collection kosong',
-          backgroundColor: AppColors.error,
+          backgroundColor: AppColors.warning,
           snackPosition: SnackPosition.TOP,
           animationDuration: Duration(milliseconds: 800),
           duration: Duration(seconds: 3),
