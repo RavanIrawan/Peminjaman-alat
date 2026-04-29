@@ -19,6 +19,7 @@ class PeminjamanModel {
   String profilePeminjam;
   String namaPeminjam;
   String? catatanAdmin;
+  String? kerusakanType;
 
   PeminjamanModel({
     this.id,
@@ -39,5 +40,6 @@ class PeminjamanModel {
     this.catatanAdmin,
     this.tanggalDitolakAdmin,
     required this.noPeminjam,
+    this.kerusakanType,
   });
 }

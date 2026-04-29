@@ -116,7 +116,8 @@ class DataPengembalianController extends GetxController {
                 ? (dataPengembalian['tanggalDiTolakAdmin'] as Timestamp)
                       .toDate()
                 : null,
-                noPeminjam: dataPengembalian['noPeminjam']
+                noPeminjam: dataPengembalian['noPeminjam'],
+                kerusakanType: dataPengembalian['kerusakanType'] ?? 'Unkown',
           );
 
           dataPengembalianAll.add(pengembalianData);
