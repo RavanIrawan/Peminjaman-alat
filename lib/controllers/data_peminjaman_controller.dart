@@ -135,6 +135,7 @@ class DataPeminjamanController extends GetxController {
               ? (data['tanggalDitolakAdmin'] as Timestamp).toDate()
               : null,
               noPeminjam: data['noPeminjam'] ?? '0',
+              kerusakanType: data['kerusakanType'] ?? 'Unkown',
         );
         dataAll.add(peminjamanModel);
       }

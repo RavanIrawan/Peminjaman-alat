@@ -122,6 +122,7 @@ class PinjamanController extends GetxController {
                 ? (res['tanggalDiTolakAdmin'] as Timestamp).toDate()
                 : null,
             noPeminjam: res['noPeminjam'] ?? '0',
+            kerusakanType: res['kerusakanType'] ?? 'Unkown',
           );
 
           data.add(peminjaman);
