@@ -218,8 +218,7 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                                 const Text(
                                   'Perubahan oleh Admin',
                                   style: TextStyle(
-                                    color: Colors
-                                        .amber, 
+                                    color: Colors.amber,
                                     fontFamily: 'Inter',
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -227,10 +226,7 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  controller
-                                      .data
-                                      .value!
-                                      .catatanAdmin!, 
+                                  controller.data.value!.catatanAdmin!,
                                   style: TextStyle(
                                     color: Colors.brown.shade800,
                                     fontFamily: 'Inter',
@@ -318,6 +314,45 @@ class DetailPinjamanView extends GetView<DetailPinjamanController> {
                   );
                 }).toList(),
               ),
+              SizedBox(height: 15),
+
+              if (controller.data.value?.kerusakanType != null &&
+                  controller.data.value!.kerusakanType!.isNotEmpty)
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Kerusakan Pada Barang:',
+                        style: TextStyle(
+                          color: AppColors.error,
+                          fontFamily: 'Inter',
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 5,),
+                      Text(
+                        '${controller.data.value?.kerusakanType}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: AppColors.error,
+                          fontFamily: 'Inter',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
               SizedBox(height: 15),
               Text(
                 'Status Peminjaman',

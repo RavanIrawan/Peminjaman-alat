@@ -13,6 +13,7 @@ class PengembalianProvider {
     String idPetugas,
     String namaPetugas,
     String namaPeminjam,
+    String kerusakan,
   ) async {
     final batch = FirebaseFirestore.instance.batch();
 
@@ -21,6 +22,7 @@ class PengembalianProvider {
     final data = {
       'status': 'selesai',
       'denda': denda,
+      'kerusakanType': kerusakan,
       'tanggalBarangKembali': FieldValue.serverTimestamp(),
     };
 
