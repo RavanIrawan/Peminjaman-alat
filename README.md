@@ -1,4 +1,7 @@
 # peminjaman_alat
+Crucial Step karena project ini menggunakan Firebase dan Cloudinary:
+1.tambahkan file Google-services.json dari Firebase anda pada folder android/app
+2.masukan Cloudinary name dan preset name dari Cloudinary di file add_alat_controller.dart & edit_profile_controller.dart
 
 Aplikasi Peminjaman Alat merupakan perangkat lunak berbasis mobile yang dirancang untuk mendigitalisasi sistem manajemen inventaris dan sirkulasi barang. Aplikasi ini dikembangkan untuk mengatasi kendala pada pencatatan manual, seperti hilangnya data, kesulitan pelacakan aset yang sedang dipinjam, serta ketidakakuratan informasi stok. Sistem ini mengakomodasi tiga aktor utama: Peminjam yang dapat mengajukan permintaan secara mandiri, Petugas yang memvalidasi transaksi dan kondisi barang, serta Admin yang memegang kendali penuh atas manajemen data induk (alat, pengguna, dan kategori) serta pemantauan log aktivitas sistem.
 
