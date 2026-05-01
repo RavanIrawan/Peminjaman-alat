@@ -209,8 +209,8 @@ class AddAlatController extends GetxController {
 
     isUploading.value = true;
     try {
-      final cloudinaryName = 'ravanujikomstorage';
-      final storage = 'ujikom_preset';
+      final cloudinaryName = 'CLOUDINARY_NAME';
+      final storage = 'PRESET_NAME';
 
       final url =
           'https://api.cloudinary.com/v1_1/$cloudinaryName/image/upload';

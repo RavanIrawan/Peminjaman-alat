@@ -58,8 +58,8 @@ class EditProfileController extends GetxController {
 
     isUploading.value = true;
     try {
-      String cloudinaryName = 'ravanujikomstorage';
-      String cloudinaryUploadPreset = 'ujikom_preset';
+      String cloudinaryName = 'CLOUDINARY_NAME';
+      String cloudinaryUploadPreset = 'PRESET_NAME';
 
       String url =
           "https://api.cloudinary.com/v1_1/$cloudinaryName/image/upload";
